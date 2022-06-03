@@ -1,5 +1,5 @@
 export const API_ENDPOINT = "https://api.themoviedb.org/3/"
-const API_KEY= "4e460f93715e650bd9b25978e33501d9"
+const API_KEY= process.env.NEXT_APP_API_KEY
 
 export const getTrendingMovies = async() => {
     const res = await fetch(`${API_ENDPOINT}trending/movie/week?api_key=${API_KEY}`);
@@ -59,7 +59,14 @@ export const getPopular = async()=>{
 export const getMovieDetails = async(id:string) => {
     const res = await fetch(`${API_ENDPOINT}movie/${id}?api_key=${API_KEY}`);
     const data= await res.json();
-    
+
     return data;
 
+}
+
+export const getRecommendations = async(id:string)=>{
+    const res = await fetch(`${API_ENDPOINT}movie/${id}/recommendations?api_key=${API_KEY}`);
+    const data= await res.json();
+
+    return data.results;
 }

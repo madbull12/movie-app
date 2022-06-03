@@ -27,7 +27,7 @@ const Home = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovies }:I
 
 
         {/* <Sidebar /> */}
-        <Navbar />
+        {/* <Navbar /> */}
         <Dashboard topRatedMovies={topRatedMovies} trendingMovies={trendingMovies} nowPlayingMovies={nowPlayingMovies} popularMovies={popularMovies} />
 
           

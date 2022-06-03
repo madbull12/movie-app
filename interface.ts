@@ -12,6 +12,33 @@ export interface Movie {
     video:boolean;
     vote_count:number;
     vote_average:number;
+    name?:string;
+}
+
+export interface MovieDetails {
+    backdrop_path?:string;
+    genres:Genre[];
+    id:number;
+    popularity:number;
+    release_date:string;
+    title:string;
+    status:string;
+    production_companies:Company[];
+    overview:string;
+    runtime?:number;
+    vote_average:number;
+
+}
+
+interface Company {
+    name:string;
+    id:number;
+    logo_path?:string;
+
+}
+
+interface Genre {
+    id:number;
     name:string;
 }
 

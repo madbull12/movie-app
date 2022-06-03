@@ -14,7 +14,7 @@ interface IMovie {
 const Dashboard = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovies }:IMovie) => {
   const router = useRouter();
   return (
-    <div className='pl-6 bg-[#0D0C0F] space-y-8 text-gray-500 ml-[190px] mx-auto max-w-4xl min-h-screen space-y-8'>
+    <div className='pl-6 bg-[#0D0C0F]  text-gray-500 ml-[190px] mx-auto max-w-4xl min-h-screen space-y-8'>
       <div>
         <h1 className='font-bold text-2xl text-white mb-2'>Trending movies</h1>
         <div className='row scrollbar scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>

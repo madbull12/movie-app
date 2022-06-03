@@ -15,9 +15,10 @@ interface IMovie {
 
 const Poster = ({ movie,size }:IMovie) => {
   const router = useRouter();
+
   return (
     <section className='relative'>
-        <Link href={`/${router.pathname === "/" ? "movie" : router.pathname}/${movie.id}`}>
+        <Link href={`/movie/${movie.id}`}>
           <Image src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width={`${size === "big" ? "500":"200"}`}  height={`${size === "big" ? "300":"250"}`} objectFit='cover' className="w-full rounded-xl cursor-pointer" />
 
         </Link>
