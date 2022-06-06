@@ -10,23 +10,23 @@ import { useRouter } from 'next/router'
 interface IMovie {
     movie:Movie
     size:string,
-
+    type:string
 }
 
-const Poster = ({ movie,size }:IMovie) => {
+const Poster = ({ movie,size,type }:IMovie) => {
   const router = useRouter();
 
   return (
     <section className='relative'>
-        <Link href={`/movie/${movie.id}`}>
-          <Image src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width={`${size === "big" ? "500":"200"}`}  height={`${size === "big" ? "300":"250"}`} objectFit='cover' className="w-full rounded-xl cursor-pointer" />
+        <Link href={`/${type}/${movie.id}`}>
+          <Image alt={movie.name || movie.title} src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width={`${size === "big" ? "500":"200"}`}  height={`${size === "big" ? "300":"250"}`} objectFit='cover' className="w-full rounded-xl cursor-pointer" />
 
         </Link>
        {/* <Image src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width={`${size === "big" ? "500":"200"}`}  height={`${size === "big" ? "300":"250"}`} objectFit='cover' className="w-full rounded-xl cursor-pointer" /> */}
         {size === "normal" && (
           <div className='absolute top-4 left-4 flex gap-1.5 items-center bg-black opacity-75 rounded-full px-2'>
             <AiFillStar color="yellow" />
-            <p className='text-white'>{movie.vote_average}</p>
+            <p className='text-white'>{movie.vote_average.toFixed(1)}</p>
           </div>
         )}
         <div className={`flex ${size === "big" ? "items-center" : ""} justify-between w-[95%] absolute bottom-4 left-4 ${size === "normal" ? "flex-col" : ""}`}>

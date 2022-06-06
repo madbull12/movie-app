@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar'
+import Right from './Right'
 import Sidebar from './Sidebar'
 
 const Layout = ({ children }:any) => {
@@ -8,7 +9,7 @@ const Layout = ({ children }:any) => {
         <Sidebar />
         <Navbar />
         {children}
-    
+        <Right />
         
     </>
   )

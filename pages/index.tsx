@@ -39,7 +39,7 @@ const Home = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovies }:I
   )
 }
 
-export const getStaticProps = async() => {
+export const getServerSideProps = async() => {
   const [trendingMovies,nowPlayingMovies,topRatedMovies,popularMovies] = ([await getTrendingMovies(),await getNowPlaying(),await getTopRated(),await getPopular()]);
 
 

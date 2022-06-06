@@ -30,6 +30,42 @@ export interface MovieDetails {
 
 }
 
+export interface TVDetails extends MovieDetails {
+    episode_run_time:number[];
+    first_air_date:string;
+    last_air_date:string;
+    name:string;
+    networks:Network[];
+    number_of_episodes:number;
+    number_of_seasons:number
+    seasons:Season[];
+}
+
+interface Season {
+    id:number;
+    name:string;
+    poster_path:string;
+    season_number:number;
+}
+
+export interface SeasonDetails extends Season {
+    overview:string;
+    episodes:Episode[]
+}
+
+interface Episode {
+    id:number;
+    name:string;
+    still_path:string;
+}
+
+interface Network {
+    name:string;
+    id:number;
+    logo_path:string;
+
+}
+
 interface Company {
     name:string;
     id:number;
@@ -37,9 +73,32 @@ interface Company {
 
 }
 
+export interface Cast {
+    id:number;
+    name:string;
+    profile_path:string;
+    character:string;
+
+}
+
 interface Genre {
     id:number;
     name:string;
+}
+
+export interface MovieReview {
+    id:string;
+    author_details:Author;
+    content:string;
+    created_at:string;
+    url:string;
+}
+
+interface Author {
+    name:string;
+    username:string;
+    avatar_path:string | null;
+    rating:number;
 }
 
 // export interface TV {

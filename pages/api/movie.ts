@@ -70,3 +70,42 @@ export const getRecommendations = async(id:string)=>{
 
     return data.results;
 }
+export const getCredits = async(id:string)=>{
+    const res = await fetch(`${API_ENDPOINT}movie/${id}/credits?api_key=${API_KEY}`);
+    const data= await res.json();
+
+    return data.cast;
+}
+export const getSimilar = async(id:string)=>{
+    const res = await fetch(`${API_ENDPOINT}movie/${id}/similar?api_key=${API_KEY}`);
+    const data= await res.json();
+
+    return data.results;
+}
+export const getReviews = async(id:string)=>{
+    const res = await fetch(`${API_ENDPOINT}movie/${id}/reviews?api_key=${API_KEY}`);
+    const data= await res.json();
+
+    return data.results;
+}
+
+export const getTVDetails = async(id:string)=>{
+    const res = await fetch(`${API_ENDPOINT}tv/${id}?api_key=${API_KEY}`);
+    const data= await res.json();
+
+    return data;
+}
+
+export const getSimilarTVShows = async(id:string)=>{
+    const res = await fetch(`${API_ENDPOINT}tv/${id}/similar?api_key=${API_KEY}`);
+    const data= await res.json();
+
+    return data.results;
+}
+
+export const getSeasonDetails = async(tvId:string,seasonId:string) => {
+    const res = await fetch(`${API_ENDPOINT}tv/${tvId}/season/${seasonId}?api_key=${API_KEY}`);
+    const data= await res.json();
+
+    return data;
+}
