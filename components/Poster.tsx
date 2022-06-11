@@ -19,7 +19,7 @@ const Poster = ({ movie,size,type }:IMovie) => {
   return (
     <section className='relative'>
         <Link href={`/${type}/${movie.id}`}>
-          <Image alt={movie.name || movie.title} src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width={`${size === "big" ? "500":"200"}`}  height={`${size === "big" ? "300":"250"}`} objectFit='cover' className="w-full rounded-xl cursor-pointer" />
+          <Image  alt={movie.name || movie.title} src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width={`${size === "big" ? "500":"200"}`}  height={`${size === "big" ? "300":"250"}`} objectFit='cover' className="w-full rounded-xl cursor-pointer" />
 
         </Link>
        {/* <Image src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width={`${size === "big" ? "500":"200"}`}  height={`${size === "big" ? "300":"250"}`} objectFit='cover' className="w-full rounded-xl cursor-pointer" /> */}
@@ -38,7 +38,7 @@ const Poster = ({ movie,size,type }:IMovie) => {
               {Array(Math.round(movie.vote_average/2)).fill("").map((_,i)=>(
                 <AiFillStar color="yellow" size={18} key={i} />
               ))}
-              {movie.vote_average}
+              {movie.vote_average.toFixed(1)}
             </div>
             )}
         

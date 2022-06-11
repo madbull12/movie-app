@@ -5,22 +5,25 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { BiHeart } from 'react-icons/bi';
 import Poster from '../../../components/Poster';
-import { Movie, TVDetails } from '../../../interface';
-import { getAiringTodayTvShows, getMovieDetails, getOnTheAirTvShows, getSimilar, getSimilarTVShows, getTrendingTvShows, getTVDetails } from '../../api/movie';
+import { Cast, Movie, TVDetails } from '../../../interface';
+import { getAiringTodayTvShows, getMovieDetails, getOnTheAirTvShows, getSimilar, getSimilarTVShows, getTrendingTvShows, getTVCasts, getTVDetails } from '../../api/movie';
 
 
 interface ITV {
   tvDetails:TVDetails,
-  similarTvShows:Movie[]
+  similarTvShows:Movie[],
+  tvCasts:Cast[]
 }
 
-const TVDetailsPage = ({ tvDetails,similarTvShows }:ITV) => {
+const TVDetailsPage = ({ tvDetails,similarTvShows,tvCasts }:ITV) => {
     const router = useRouter();
     const { tvId } =router.query;
     const [showMoreSeasons,setShowMoreSeasons] = useState<boolean>(false);
+    const [showMoreCasts,setShowMoreCasts] = useState<boolean>(false);
 
     useEffect(()=>{
       setShowMoreSeasons(false);
+      setShowMoreCasts(false);
     },[])
     // console.log(tvDetails)
   return (
@@ -96,6 +99,25 @@ const TVDetailsPage = ({ tvDetails,similarTvShows }:ITV) => {
                 }
               </div>
               <div className='space-y-2'>
+                <h1 className='text-xl font-bold'>Casts</h1>
+                <div className='grid grid-cols-6 gap-3'>
+                    {tvCasts.slice(0,showMoreCasts ? 15 : 6).map((cast)=>(  
+                        <div key={cast.id}  className='flex flex-col space-y-2 '>
+                            <Image  alt={cast.name} src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}  width={150} objectFit="cover" height={200} className="rounded-md mb-2" />
+                            <div>
+                                <p className='text-white'>{cast.name}</p>
+                                <p>{cast.character}</p>
+                            </div>
+                            
+                     
+                        </div>
+                      
+                    ))}
+                    
+                </div>
+                <p className='cursor-pointer whitespace-nowrap mx-auto w-16' onClick={()=>setShowMoreCasts(!showMoreCasts)}>{showMoreCasts ? "Show less" : "Show more"}</p>
+            </div>
+              <div className='space-y-2'>
                 <h1 className='text-lg font-bold'>Similar TV Shows</h1>
                 <div className='row scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
                   {similarTvShows.map((show)=>(
@@ -133,12 +155,13 @@ export const getStaticPaths = async() => {
 }
 
 export const getStaticProps = async({ params }:any) => {
-  const [tvDetails,similarTvShows] = ([await getTVDetails(params.tvId),await getSimilarTVShows(params.tvId)])
+  const [tvDetails,similarTvShows,tvCasts] = ([await getTVDetails(params.tvId),await getSimilarTVShows(params.tvId),await getTVCasts(params.tvId)])
 
   return {
     props:{
       tvDetails,
-      similarTvShows
+      similarTvShows,
+      tvCasts
     }
   }
 }

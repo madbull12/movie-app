@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import React from 'react'
+import { useRecoilState } from 'recoil';
+import { searchState } from '../../../../atoms/searchAtom';
 import { SeasonDetails } from '../../../../interface';
 import { getSeasonDetails } from '../../../api/movie';
 
@@ -9,6 +11,7 @@ interface ISeasonDetails {
 }
 const TVSeasonPage = ({ seasonDetails }:ISeasonDetails) => {
     // console.log(seasonDetails)
+
   return (
     <main className='text-gray-500 bg-[#0D0C0F]  min-h-screen ml-[190px] mx-auto max-w-4xl'>
         <Head>

@@ -1,5 +1,5 @@
 export const API_ENDPOINT = "https://api.themoviedb.org/3/"
-const API_KEY= process.env.NEXT_APP_API_KEY
+export const API_KEY= process.env.NEXT_APP_API_KEY
 
 export const getTrendingMovies = async() => {
     const res = await fetch(`${API_ENDPOINT}trending/movie/week?api_key=${API_KEY}`);
@@ -76,6 +76,14 @@ export const getCredits = async(id:string)=>{
 
     return data.cast;
 }
+
+export const getTVCasts = async(id:string) => {
+    const res = await fetch(`${API_ENDPOINT}tv/${id}/credits?api_key=${API_KEY}`);
+    const data= await res.json();
+    
+    return data.cast;
+}
+
 export const getSimilar = async(id:string)=>{
     const res = await fetch(`${API_ENDPOINT}movie/${id}/similar?api_key=${API_KEY}`);
     const data= await res.json();
@@ -109,3 +117,41 @@ export const getSeasonDetails = async(tvId:string,seasonId:string) => {
 
     return data;
 }
+
+export const getDiscoveryMovies = async() => {
+    const res = await fetch(`${API_ENDPOINT}discover/movie?api_key=${API_KEY}&vote_average.gte=9`);
+    const data= await res.json();
+
+    return data.results;
+}
+export const getDiscoveryTVs = async() => {
+    const res = await fetch(`${API_ENDPOINT}discover/tv?api_key=${API_KEY}&vote_average.gte=9`);
+    const data= await res.json();
+
+    return data.results;
+}
+export const getMovieAnimation = async() => {
+    const res = await fetch(`${API_ENDPOINT}discover/movie?api_key=${API_KEY}&with_genres=16`);
+    const data= await res.json();
+
+    return data.results;
+}
+export const getTvAnimation = async() => {
+    const res = await fetch(`${API_ENDPOINT}discover/tv?api_key=${API_KEY}&with_genres=16`);
+    const data= await res.json();
+
+    return data.results;
+}
+export const getMovieThriller = async() => {
+    const res = await fetch(`${API_ENDPOINT}discover/movie?api_key=${API_KEY}&with_genres=53`);
+    const data= await res.json();
+
+    return data.results;
+}
+
+// export const getSearchMovies = async(searchTerm:string)=>{
+//     const res = await fetch(`${API_ENDPOINT}search/movie?api_key=${API_KEY}&query=${searchTerm}`);
+//     const data= await res.json();
+
+//     return data.results;
+// }

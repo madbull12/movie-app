@@ -2,13 +2,14 @@ import Head from 'next/head'
 import React from 'react'
 import Navbar from '../../components/Navbar'
 import TVDashboard from '../../components/TVDashboard'
-import { Movie } from '../../interface'
-import { getAiringTodayTvShows, getOnTheAirTvShows, getTrendingTvShows } from '../api/movie'
+import { Cast, Movie } from '../../interface'
+import { getAiringTodayTvShows, getOnTheAirTvShows, getTrendingTvShows, getTVCasts } from '../api/movie'
 
 interface ITv {
     trendingTvShows:Movie[],
     airingToday:Movie[],
-    onTheAir:Movie[]
+    onTheAir:Movie[],
+
 }
 
 const TVPage = ({ trendingTvShows,airingToday,onTheAir }:ITv) => {
@@ -33,7 +34,8 @@ export const getStaticProps = async() => {
         props:{
             trendingTvShows,
             airingToday,
-            onTheAir
+            onTheAir,
+          
         }
     }
 }

@@ -11,7 +11,7 @@ interface ITVShows {
 const TVDashboard = ({ trendingTvShows,airingToday,onTheAir }:ITVShows) => {
   return (
     <section className='pl-6 bg-[#0D0C0F]  text-gray-500 ml-[190px] mx-auto max-w-4xl min-h-screen space-y-8'>
-      <article>
+      <article className='space-y-2'>
         <h1 className='text-white font-bold text-2xl'>Trending this week</h1>
           <div className='row scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
             {trendingTvShows.map((show)=>(
@@ -20,7 +20,7 @@ const TVDashboard = ({ trendingTvShows,airingToday,onTheAir }:ITVShows) => {
           </div>
       </article>
         
-      <article>
+      <article className='space-y-2'>
         <h1 className='text-white font-bold text-2xl'>Airing today</h1>
 
         <div className='row scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
@@ -29,7 +29,7 @@ const TVDashboard = ({ trendingTvShows,airingToday,onTheAir }:ITVShows) => {
           ))}
         </div>
       </article>
-      <article>
+      <article className='space-y-2'>
         <h1 className='text-white font-bold text-2xl'>On the air</h1>
 
         <div className='row scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>

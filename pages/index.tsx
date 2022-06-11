@@ -1,12 +1,16 @@
-import type { GetStaticProps, NextPage } from 'next'
+
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
 import Dashboard from '../components/Dashboard'
-import Navbar from '../components/Navbar'
-import Sidebar from '../components/Sidebar'
 import { Movie } from '../interface'
 import { getNowPlaying, getPopular, getTopRated, getTrendingMovies } from './api/movie'
+import { useRouter } from 'next/router'
+import { MouseEventHandler, useEffect, useState } from 'react'
+import { useAuth } from "../context/UserContext"
+import { supabase } from '../lib/supabase'
+import { NextApiRequest,NextApiResponse } from "next";
+import { User } from '@supabase/supabase-js'
+
+
 
 interface IMovie {
   trendingMovies:Movie[];
@@ -16,6 +20,44 @@ interface IMovie {
 }
 
 const Home = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovies }:IMovie) => {
+  const router = useRouter()
+
+  const [user, setUser] = useState<User | null>();
+
+  // const handleLogOut: MouseEventHandler = async (e) => {
+  //   e.preventDefault();
+
+  //   const { error } = await supabase.auth.signOut();
+
+  //   if (error) {
+  //     alert(JSON.stringify(error));
+  //   } else {
+  //     router.push('/login');
+  //   }
+  // };
+
+  useEffect(() => {
+    const getProfile = () => {
+      const profile = supabase.auth.user();
+
+      if (profile) {
+        setUser(profile);
+      } else {
+        router.push('/login');
+      }
+    };
+
+    getProfile();
+    console.log(user)
+  }, []);
+
+  // const [data,setData] = useState<any>(null)
+ 
+  if (!user) {
+    // Currently loading asynchronously User Supabase Information
+    return null;
+  }
+    
 
   return (
     <div className='overflow-hidden'>
@@ -39,7 +81,7 @@ const Home = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovies }:I
   )
 }
 
-export const getServerSideProps = async() => {
+export const getServerSideProps = async(req:NextApiRequest, res:NextApiResponse) => {
   const [trendingMovies,nowPlayingMovies,topRatedMovies,popularMovies] = ([await getTrendingMovies(),await getNowPlaying(),await getTopRated(),await getPopular()]);
 
 
