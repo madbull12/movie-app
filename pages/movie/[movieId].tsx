@@ -37,7 +37,7 @@ const MovieDetailsPage = ({ movieDetails,movieRecommendations,movieCasts,movieSi
      
         <div className='relative'>
             <Image alt={movieDetails.title} src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`} width="100%" height={50} layout="responsive" objectFit='cover'  />
-            <div className=' w-[90%] md:px-2 py-2 md:py-4  -mt-20 text-white backdrop-sepia-0 bg-black/30 rounded-lg mx-auto space-y-2'>
+            <div className=' w-[90%] px-2  py-2 md:py-4  -mt-20 text-white backdrop-sepia-0 bg-black/30 rounded-lg mx-auto space-y-2'>
                 <div className='flex justify-between items-center'>
                     <h1 className=' text-lg md:text-xl font-semibold'>{movieDetails.title}</h1>
                     <BiHeart size={24} className="cursor-pointer" />
@@ -61,7 +61,7 @@ const MovieDetailsPage = ({ movieDetails,movieRecommendations,movieCasts,movieSi
         <div className='text-gray-500 px-4 md:px-8 py-2 md:py-4 space-y-6'>
             <div>
                 <h1 className='text-xl font-bold'>Plot</h1>
-                <p className=''>
+                <p className='text-sm md:text-base'>
                     {movieDetails.overview}
                 </p>
             </div>
@@ -72,8 +72,8 @@ const MovieDetailsPage = ({ movieDetails,movieRecommendations,movieCasts,movieSi
                         <div key={cast.id}  className='flex flex-col space-y-2 '>
                             <Image  alt={cast.name} src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}  width={150} objectFit="cover" height={200} className="rounded-md mb-2" />
                             <div>
-                                <p className='text-white'>{cast.name}</p>
-                                <p className='truncate'>{cast.character}</p>
+                                <p className='text-white text-sm md:text-base'>{cast.name}</p>
+                                <p className='truncate text-sm md:text-base'>{cast.character}</p>
                             </div>
                             
                      

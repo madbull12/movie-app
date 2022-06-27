@@ -23,6 +23,7 @@ const Home = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovies }:I
 
   const [user, setUser] = useState<User | null>();
 
+
   // const handleLogOut: MouseEventHandler = async (e) => {
   //   e.preventDefault();
 

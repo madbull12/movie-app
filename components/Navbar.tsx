@@ -5,9 +5,13 @@ import { BsGridFill } from 'react-icons/bs'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Search from './Search'
+import { IoMenuOutline } from 'react-icons/io5'
+import { rightSidebar } from '../atoms/rightSidebar'
+import { useRecoilState } from 'recoil'
 
 const Navbar:FC = () => {
   const router = useRouter();
+  const [openSidebar,setOpenSidebar] = useRecoilState(rightSidebar)
   return (
     <nav className="sticky ml-[55px] md:ml-[190px]  pl-6 text-gray-500 h-16 flex justify-between items-center  top-0 bg-[#0D0C0F] max-w-[894px] z-10">
        
@@ -26,6 +30,9 @@ const Navbar:FC = () => {
 
             <IoMdNotifications />
             <BsGridFill />
+            <div className="hidden md:block lg:hidden cursor-pointer" onClick={()=>setOpenSidebar(true)}>
+              <IoMenuOutline />
+            </div>
         </ul>
     </nav>
   )

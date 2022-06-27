@@ -4,11 +4,14 @@ import React, { useEffect, useState } from 'react'
 import { useAuth } from '../context/UserContext'
 import { supabase } from '../lib/supabase'
 import Search from './Search'
+import { IoClose } from 'react-icons/io5'
+import { rightSidebar } from '../atoms/rightSidebar'
+import { useRecoilState } from 'recoil'
 
 const Right = () => {
   // const [user,setUser] = useState<any>(null)
   const { user } = useAuth();
-
+  const [openSidebar,setOpenSidebar] = useRecoilState(rightSidebar);
 
 
   return (
@@ -19,6 +22,9 @@ const Right = () => {
                 <p className='text-white'>{user?.user_metadata?.full_name}</p>
                 <p className='text-sm'>{user?.user_metadata?.email}</p>
             </div>
+        </div>
+        <div className='absolute right-2 -top-2 cursor-pointer hidden md:block lg:hidden' onClick={()=>setOpenSidebar(false)}>
+          <IoClose className='text-lg' />
         </div>
       
         <Search />

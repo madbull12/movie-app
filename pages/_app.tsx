@@ -5,12 +5,13 @@ import Layout from '../components/Layout'
 import { RecoilRoot } from 'recoil'
 import { UserContextProvider } from '../context/UserContext'
 import { supabase } from '../lib/supabase'
+import { Toaster } from 'react-hot-toast'
 
 function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <UserContextProvider>
-
+  
       <RecoilRoot>
         <Layout>
           <Component {...pageProps} />

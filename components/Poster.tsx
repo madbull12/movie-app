@@ -1,20 +1,60 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Movie } from '../interface'
-import { AiFillStar } from 'react-icons/ai'
+import { AiFillStar, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { supabase } from '../lib/supabase'
+import { useAuth } from '../context/UserContext'
+import toast from 'react-hot-toast'
+import useUserBookmarks from '../hooks/useUserBookmarks'
 
 // npm i --save-dev @types/react-rating-stars-component
 
 interface IMovie {
     movie:Movie
     size:string,
-    type:string
+    type:string,
+    movieIds?:[number]
 }
 
-const Poster = ({ movie,size,type }:IMovie) => {
+const Poster = ({ movie,size,type,movieIds }:IMovie) => {
+
   const router = useRouter();
+  const { user } = useAuth();
+
+
+  const refreshData = () => {
+    router.replace(router.asPath);
+  }
+
+
+
+  const addBookmark = async(vote_avg:number,title:string,image:string,movie_id:number) => {
+    console.log('clicked');
+    const toastId = toast.loading('Adding bookmark');
+    try {
+      
+
+     await supabase
+      .from("bookmarks")
+      .insert([
+        { title:title, vote_average:vote_avg, image:image, user_id:user?.id ,movie_id:movie_id }
+      ],{
+        returning:"minimal"
+      })
+      toast.success('Bookmarked created', {
+        id: toastId,
+      });
+
+      
+    }catch(err) {
+      toast.error("Oops!, There's an error")
+      console.log(err);
+    } finally {
+      refreshData();
+    }
+  } 
 
   return (
     <section className='relative'>
@@ -46,7 +86,10 @@ const Poster = ({ movie,size,type }:IMovie) => {
           </div>
           <div className='flex gap-2 text-white items-center mt-2'>
                 <button className='bg-red-600 font-bold hover:bg-red-700 whitespace-nowrap rounded-full px-4 py-2 opacity-75'>Watch now</button>
-                <button className='w-10 h-10 rounded-full backdrop-opacity-10 backdrop-invert bg-white/30'>+</button>
+                <button className='w-10 h-10 flex items-center justify-center rounded-full backdrop-opacity-10 backdrop-invert bg-white/30' onClick={()=>addBookmark(movie?.vote_average,movie?.title,`https://image.tmdb.org/t/p/original/${movie?.poster_path}`,Number(movie?.id))}>
+                  {movieIds?.find((_movie:any)=>_movie.movie_id === movie?.id) ? <AiOutlineMinus /> : <AiOutlinePlus /> }
+        
+                </button>
           </div>
           <div className='absolute bottom-0 right-0 darker'></div>
         </div>
