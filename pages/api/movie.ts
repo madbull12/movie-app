@@ -1,5 +1,5 @@
 export const API_ENDPOINT = "https://api.themoviedb.org/3/"
-export const API_KEY= process.env.NEXT_APP_API_KEY
+export const API_KEY= process.env.NEXT_PUBLIC_TMDB_API_KEY
 
 export const getTrendingMovies = async() => {
     const res = await fetch(`${API_ENDPOINT}trending/movie/week?api_key=${API_KEY}`);

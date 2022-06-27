@@ -20,7 +20,10 @@ const Layout = ({ children }:any) => {
         <Sidebar  />
         <Navbar />
         {children}
-        <Right />
+        <div className='hidden md:block'>
+          <Right />
+
+        </div>
         
     </>
   )

@@ -5,7 +5,7 @@ import { supabase } from "../lib/supabase";
 
 // Create user context
 export const UserContext = createContext({});
-export const useAuth =() => useContext<any>(UserContext)
+export const useAuth = () => useContext<any>(UserContext)
 
 // UserContextProvider is the parent element of the entire application
 export function UserContextProvider({
@@ -18,9 +18,18 @@ export function UserContextProvider({
 
 
   const signInWithGoogle = async() => {
-     await supabase.auth.signIn({
-      provider:"google"
-    })
+    const { error } = await supabase.auth.signIn(
+      {
+        provider: 'google',
+      },
+      {
+        redirectTo: 'http://localhost:3000/callback/',
+      }
+    );
+  
+    if (error) {
+      alert(JSON.stringify(error));
+    }
 
    
   }
@@ -29,8 +38,9 @@ export function UserContextProvider({
 
     // get session for user
     const session = supabase.auth.session();
+    const user = supabase.auth.user();
     setSession(session);
-
+    setUser(user)
     // configure the auth state listener
     // if the auth state changes the session will be updated
     // and a POST request will be made to the /api/auth route
@@ -54,7 +64,7 @@ export function UserContextProvider({
 
 
 
-  return <UserContext.Provider value={{ session,signInWithGoogle }}>
+  return <UserContext.Provider value={{ session,signInWithGoogle,user }}>
     {children}
   </UserContext.Provider>;
 };

@@ -27,7 +27,7 @@ const MovieDetailsPage = ({ movieDetails,movieRecommendations,movieCasts,movieSi
     },[])
 
   return (
-    <main className=' bg-[#0D0C0F]  text-gray-500 ml-[190px] mx-auto max-w-4xl min-h-screen space-y-4'>
+    <main className=' bg-[#0D0C0F]  text-gray-500 ml-[55px] md:ml-[190px] mx-auto max-w-4xl min-h-screen space-y-4'>
      
         <Head>
             <title>{movieDetails.title}</title>
@@ -37,43 +37,43 @@ const MovieDetailsPage = ({ movieDetails,movieRecommendations,movieCasts,movieSi
      
         <div className='relative'>
             <Image alt={movieDetails.title} src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`} width="100%" height={50} layout="responsive" objectFit='cover'  />
-            <div className=' w-[90%] px-2 py-4  -mt-20 text-white backdrop-sepia-0 bg-black/30 rounded-lg mx-auto space-y-2'>
+            <div className=' w-[90%] md:px-2 py-2 md:py-4  -mt-20 text-white backdrop-sepia-0 bg-black/30 rounded-lg mx-auto space-y-2'>
                 <div className='flex justify-between items-center'>
-                    <h1 className='text-xl font-semibold'>{movieDetails.title}</h1>
+                    <h1 className=' text-lg md:text-xl font-semibold'>{movieDetails.title}</h1>
                     <BiHeart size={24} className="cursor-pointer" />
                 </div>
                 <div className='flex gap-2 items-center'>
                     <p className='font-bold'>Genres:</p>
                     {movieDetails.genres.map((genre,i)=>(
-                        <p key={genre.id} className="text-base">
+                        <p key={genre.id} className="text-sm md:text-base">
                             {!(i === movieDetails.genres.length - 1) ? genre.name + "," : genre.name}
                         </p>
                     ))}
                 </div>
                 <div>
-                    <p className='font-bold'>Duration: <span className='font-normal'>{movieDetails.runtime} minutes</span></p>
+                    <p className='font-bold'>Duration: <span className='font-normal text-sm md:text-base'>{movieDetails.runtime} minutes</span></p>
                 </div>
                 <div>
-                    <p className='font-bold'>Rating: <span className='font-normal'>{movieDetails.vote_average}</span></p>
+                    <p className='font-bold'>Rating: <span className='font-normal text-sm md:text-base'>{movieDetails.vote_average}</span></p>
                 </div>
             </div>
         </div>
-        <div className='text-gray-500 px-8 py-4 space-y-8'>
+        <div className='text-gray-500 px-4 md:px-8 py-2 md:py-4 space-y-6'>
             <div>
                 <h1 className='text-xl font-bold'>Plot</h1>
-                <p>
+                <p className=''>
                     {movieDetails.overview}
                 </p>
             </div>
             <div className='space-y-2'>
                 <h1 className='text-xl font-bold'>Casts</h1>
-                <div className='grid grid-cols-6 gap-3'>
+                <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3'>
                     {movieCasts.slice(0,showMoreCasts ? 15 : 6).map((cast)=>(  
                         <div key={cast.id}  className='flex flex-col space-y-2 '>
                             <Image  alt={cast.name} src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}  width={150} objectFit="cover" height={200} className="rounded-md mb-2" />
                             <div>
                                 <p className='text-white'>{cast.name}</p>
-                                <p>{cast.character}</p>
+                                <p className='truncate'>{cast.character}</p>
                             </div>
                             
                      
@@ -86,8 +86,8 @@ const MovieDetailsPage = ({ movieDetails,movieRecommendations,movieCasts,movieSi
             </div>
             <div className='space-y-2'>
                 <div className='flex justify-between items-center'>
-                    <h1 className='text-xl font-bold'>Recommendations for you</h1>
-                    <p className='cursor-pointer' onClick={()=>setShowMoreRecommendations(!showMoreRecommendations)}>{showMoreRecommendations ? "Show less" : "Show more"}</p>
+                    <h1 className='text-lg md:text-xl font-bold'>Recommendations for you</h1>
+                    <p className='cursor-pointer whitespace-nowrap' onClick={()=>setShowMoreRecommendations(!showMoreRecommendations)}>{showMoreRecommendations ? "Show less" : "Show more"}</p>
 
                 </div>
                 <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-rounded-md'>

@@ -7,6 +7,9 @@ import { useRecoilState } from 'recoil'
 import { searchResultsState, searchState } from '../atoms/searchAtom'
 import { mediaTypeState } from '../atoms/mediaTypeAtom'
 import Head from 'next/head'
+import { useAuth } from '../context/UserContext'
+import { useRouter } from 'next/router'
+import Search from '../components/Search'
 
 interface IDiscoveryMovies {
   discoveryMovies:Movie[],
@@ -24,7 +27,19 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
   // useEffect(()=>{
   //     setSearchResults(null);
   // },[])
-  const [mediaType] = useRecoilState(mediaTypeState)
+  const router = useRouter();
+  const [mediaType] = useRecoilState(mediaTypeState);
+
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if(!user) {
+      router.push("/login")
+    }
+  },[]);
+
+
+
 
   return (
     <main>
@@ -34,23 +49,26 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className='pl-6 bg-[#0D0C0F]  text-gray-500 ml-[190px] mx-auto max-w-4xl min-h-screen space-y-8'>
-      <h1 className='text-4xl text-white font-black text-center  '>Discover Movie Star</h1>
+      <div className='pl-6 bg-[#0D0C0F]  text-gray-500 ml-[55px] md:ml-[190px] mx-auto max-w-4xl min-h-screen space-y-4'>
+      <h1 className='text-2xl  md:text-4xl text-white font-black text-center whitespace-nowrap '>Discover Movie Star</h1>
+      <div className="md:hidden">
+        <Search />
+      </div>
       {searchResults  && (
           <div className='space-y-2'>
-            <h1 className='text-2xl text-white font-bold'>Search Results</h1>
+            <h1 className='text-xl md:text-2xl text-white font-bold'>Search Results</h1>
             <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
               {searchResults?.map((movie:Movie)=>(
                     
                     <Poster key={movie.id} movie={movie} size="big" type={mediaType}  />
-      
+                    
       
               ))}
             </div>
           </div>
       )}
       <div className='space-y-2'>
-        <h1 className='text-2xl text-white font-bold'>9+ rated movies of all time</h1>
+        <h1 className='text-xl md:text-2xl text-white font-bold'>9+ rated movies of all time</h1>
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
             {discoveryMovies.map((movie)=>(
                   
@@ -61,7 +79,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
         </div>
       </div>
       <div className='space-y-2'>
-        <h1 className='text-2xl text-white font-bold'>Best TV Shows of all tiem</h1>
+        <h1 className='text-xl md:text-2xl text-white font-bold'>Best TV Shows of all tiem</h1>
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
             {discoveryTvs.map((movie)=>(
                   
@@ -72,7 +90,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
         </div>
       </div>
       <div className='space-y-2'>
-        <h1 className='text-2xl text-white font-bold'>Animation </h1>
+        <h1 className='text-xl md:text-2xl text-white font-bold'>Animation </h1>
         <p>Movies</p>
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
             {animationMovies.map((movie)=>(
@@ -93,7 +111,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
         </div>
       </div>
       <div className='space-y-2'>
-        <h1 className='text-2xl text-white font-bold'>Thriller Movies</h1>
+        <h1 className='text-xl md:text-2xl text-white font-bold'>Thriller Movies</h1>
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
             {thrillerMovies.map((movie)=>(
                   

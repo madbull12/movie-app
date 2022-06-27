@@ -32,9 +32,9 @@ const TVSeasonPage = ({ seasonDetails }:ISeasonDetails) => {
                 </div>
                 <div>
                     <h1 className='text-lg font-bold'>Episodes</h1>
-                    <ul className='grid grid-cols-4 gap-y-4'>
+                    <ul className='grid grid-cols-4 gap-4'>
                         {seasonDetails.episodes.map((episode)=>(
-                            <li key={episode.id}>
+                            <li key={episode.id} className="truncate flex flex-col ">
                                 <Image src={`https://image.tmdb.org/t/p/original${episode.still_path}`} width={100} height={100} objectFit="cover" alt={episode.name}  />
                                 <span className='text-xs md:text-sm'>{episode.name}</span>
                             </li>

@@ -1,4 +1,3 @@
-
 import Head from 'next/head'
 import Dashboard from '../components/Dashboard'
 import { Movie } from '../interface'
@@ -35,6 +34,9 @@ const Home = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovies }:I
   //     router.push('/login');
   //   }
   // };
+  const refreshData = () => {
+    router.replace(router.asPath)
+  }
 
   useEffect(() => {
     const getProfile = () => {
@@ -42,14 +44,19 @@ const Home = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovies }:I
 
       if (profile) {
         setUser(profile);
+      
+
       } else {
         router.push('/login');
       }
     };
 
     getProfile();
-    console.log(user)
+    
+   
   }, []);
+
+  
 
   // const [data,setData] = useState<any>(null)
  
