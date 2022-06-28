@@ -161,7 +161,7 @@ export const getStaticPaths = async() => {
 }
 
 export const getStaticProps = async({ params }:any) => {
-    const [movieDetails,movieRecommendations,movieCasts,movieSimilar,movieReviews] = ([await getMovieDetails(params.movieId),await getRecommendations(params.movieId),await getCredits(params.movieId),await getSimilar(params.movieId),await getReviews(params.movieId)])
+    const [movieDetails,movieRecommendations,movieCasts,movieSimilar,movieReviews] = ([await getMovieDetails(params.movieId),await getRecommendations(params.movieId),await getCredits(params.movieId),await getSimilar(params.movieId),await getReviews(params.movieId,"movie")])
     
     return {
         props:{

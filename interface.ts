@@ -13,6 +13,7 @@ export interface Movie {
     vote_count:number;
     vote_average:number;
     name?:string;
+    movie_id?:number;
 }
 
 export interface MovieDetails {

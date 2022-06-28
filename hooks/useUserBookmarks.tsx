@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 
-export default function useUserBookmarks(user:any,column?:string) {
+export default function useUserBookmarks(userId:string) {
     const [userBookmarks,setUserBookmarks] = useState<any>();
   
     useEffect(()=>{
@@ -9,7 +9,7 @@ export default function useUserBookmarks(user:any,column?:string) {
         const { data } = await supabase 
           .from("bookmarks")
           .select()
-          .eq("user_id",user?.id)
+          .eq("user_id",userId)
     
         // const findBookmark = data?.map((bookmark)=>bookmark.user_id === user?.id);
        
@@ -24,7 +24,7 @@ export default function useUserBookmarks(user:any,column?:string) {
       }
   
       getCurrentUserBookmarks();
-    },[]);
+    },[userBookmarks,userId]);
 
     return userBookmarks
 }

@@ -22,10 +22,10 @@ const Dashboard = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovie
   const { user } = useAuth(); 
 
 
-  const [bookmarkExists,setBookmarkExists] = useState<boolean>();
-  const movieIdBookmarks = useUserBookmarks(user,'movie_id');
+  // const [bookmarkExists,setBookmarkExists] = useState<boolean>();
+  const movieIdBookmarks = useUserBookmarks(user?.id);
 
-  console.log(movieIdBookmarks);
+
 
   return (
     <div className='pl-6 bg-[#0D0C0F]  text-gray-500 ml-[55px] md:ml-[190px] mx-auto max-w-4xl min-h-screen space-y-8'>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Poster from '../components/Poster'
 import { Movie } from '../interface'
 import { getDiscoveryMovies, getDiscoveryTVs, getMovieAnimation, getMovieThriller, getTvAnimation } from './api/movie'
@@ -10,6 +10,7 @@ import Head from 'next/head'
 import { useAuth } from '../context/UserContext'
 import { useRouter } from 'next/router'
 import Search from '../components/Search'
+import useUserBookmarks from '../hooks/useUserBookmarks'
 
 interface IDiscoveryMovies {
   discoveryMovies:Movie[],
@@ -31,6 +32,12 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
   const [mediaType] = useRecoilState(mediaTypeState);
 
   const { user } = useAuth();
+
+
+
+
+  const [bookmarkExists,setBookmarkExists] = useState<boolean>();
+  const movieIdBookmarks = useUserBookmarks(user?.id);
 
   useEffect(() => {
     if(!user) {
@@ -60,7 +67,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
             <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
               {searchResults?.map((movie:Movie)=>(
                     
-                    <Poster key={movie.id} movie={movie} size="big" type={mediaType}  />
+                    <Poster key={movie.id} movie={movie} size="big" type={mediaType}movieIds={movieIdBookmarks}  />
                     
       
               ))}
@@ -72,7 +79,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
             {discoveryMovies.map((movie)=>(
                   
-                  <Poster key={movie.id} movie={movie} size="big" type="movie"   />
+                  <Poster key={movie.id} movie={movie} size="big" type="movie"movieIds={movieIdBookmarks}   />
     
     
             ))}
@@ -83,7 +90,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
             {discoveryTvs.map((movie)=>(
                   
-                  <Poster key={movie.id} movie={movie} size="big" type="tv-series"   />
+                  <Poster key={movie.id} movie={movie} size="big" type="tv-series"movieIds={movieIdBookmarks}   />
     
     
             ))}
@@ -95,7 +102,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
             {animationMovies.map((movie)=>(
                   
-                  <Poster key={movie.id} movie={movie} size="normal" type="movie"   />
+                  <Poster key={movie.id} movie={movie} size="normal" type="movie"movieIds={movieIdBookmarks}   />
     
     
             ))}
@@ -104,7 +111,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
             {animationTvs.map((movie)=>(
                   
-                  <Poster key={movie.id} movie={movie} size="normal" type="tv-series"   />
+                  <Poster key={movie.id} movie={movie} size="normal" type="tv-series" movieIds={movieIdBookmarks}  />
     
     
             ))}
@@ -115,7 +122,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
             {thrillerMovies.map((movie)=>(
                   
-                  <Poster key={movie.id} movie={movie} size="big" type="movie"   />
+                  <Poster key={movie.id} movie={movie} size="big" type="movie" movieIds={movieIdBookmarks}  />
     
     
             ))}

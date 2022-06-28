@@ -90,8 +90,8 @@ export const getSimilar = async(id:string)=>{
 
     return data.results;
 }
-export const getReviews = async(id:string)=>{
-    const res = await fetch(`${API_ENDPOINT}movie/${id}/reviews?api_key=${API_KEY}`);
+export const getReviews = async(id:string,type:string)=>{
+    const res = await fetch(`${API_ENDPOINT}${type}/${id}/reviews?api_key=${API_KEY}`);
     const data= await res.json();
 
     return data.results;

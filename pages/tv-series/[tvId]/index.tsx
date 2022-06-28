@@ -5,17 +5,19 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { BiHeart } from 'react-icons/bi';
 import Poster from '../../../components/Poster';
-import { Cast, Movie, TVDetails } from '../../../interface';
-import { getAiringTodayTvShows, getMovieDetails, getOnTheAirTvShows, getSimilar, getSimilarTVShows, getTrendingTvShows, getTVCasts, getTVDetails } from '../../api/movie';
+import ReviewCard from '../../../components/ReviewCard';
+import { Cast, Movie, MovieReview, TVDetails } from '../../../interface';
+import { getAiringTodayTvShows, getMovieDetails, getOnTheAirTvShows, getReviews, getSimilar, getSimilarTVShows, getTrendingTvShows, getTVCasts, getTVDetails } from '../../api/movie';
 
 
 interface ITV {
   tvDetails:TVDetails,
   similarTvShows:Movie[],
-  tvCasts:Cast[]
+  tvCasts:Cast[],
+  tvReviews:MovieReview[]
 }
 
-const TVDetailsPage = ({ tvDetails,similarTvShows,tvCasts }:ITV) => {
+const TVDetailsPage = ({ tvDetails,similarTvShows,tvCasts,tvReviews }:ITV) => {
     const router = useRouter();
     const { tvId } =router.query;
     const [showMoreSeasons,setShowMoreSeasons] = useState<boolean>(false);
@@ -125,6 +127,25 @@ const TVDetailsPage = ({ tvDetails,similarTvShows,tvCasts }:ITV) => {
                   ))}
                </div>
               </div>
+              <div className="space-y-2">
+                <div className='flex justify-between items-center'>
+                    <h1 className='text-xl font-bold'>Reviews</h1>
+                    {/* <p className='cursor-pointer' onClick={()=>setShowMoreRecommendations(!showMoreRecommendations)}>{showMoreRecommendations ? "Show less" : "Show more"}</p> */}
+                </div>
+                {tvReviews.length !== 0 ? (
+                    <div className='space-y-8 divide-y divide-gray-500'>
+                        {tvReviews.map((review)=>(
+                            <ReviewCard key={review.id} review={review} />
+                        ))}
+                    </div>
+                ):(
+                    <p>No reviews</p>
+                )}
+                
+                <div>
+                  
+                </div>
+            </div>
             </div>
         </div>
       </main>
@@ -155,13 +176,14 @@ export const getStaticPaths = async() => {
 }
 
 export const getStaticProps = async({ params }:any) => {
-  const [tvDetails,similarTvShows,tvCasts] = ([await getTVDetails(params.tvId),await getSimilarTVShows(params.tvId),await getTVCasts(params.tvId)])
+  const [tvDetails,similarTvShows,tvCasts,tvReviews] = ([await getTVDetails(params.tvId),await getSimilarTVShows(params.tvId),await getTVCasts(params.tvId),await getReviews(params.tvId,"tv")])
 
   return {
     props:{
       tvDetails,
       similarTvShows,
-      tvCasts
+      tvCasts,
+      tvReviews
     }
   }
 }
