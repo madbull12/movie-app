@@ -45,7 +45,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
     }
   },[]);
 
-
+  
 
 
   return (

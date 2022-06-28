@@ -8,6 +8,7 @@ import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/UserContext'
 import toast from 'react-hot-toast'
 import useUserBookmarks from '../hooks/useUserBookmarks'
+import Button from './Button'
 
 // npm i --save-dev @types/react-rating-stars-component
 
@@ -58,6 +59,27 @@ const Poster = ({ movie,size,type,movieIds,internal }:IMovie) => {
     }
   } 
 
+  const deleteBookmark = async(movieId:number) => {
+    const toastId = toast.loading('Deleting bookmark');
+
+    try {
+      await supabase
+      .from("bookmarks")
+      .delete()
+      .eq("movie_id", movieId);
+
+      toast.success('Bookmarked deleted', {
+        id: toastId,
+      });
+    } catch(err) {
+      toast.error("Oops!, There's an error")
+      console.log(err);
+    } 
+ 
+  }
+
+  
+
   return (
     <section className='relative'>
       {/* `/${type}/${movie.id}` */}
@@ -90,11 +112,24 @@ const Poster = ({ movie,size,type,movieIds,internal }:IMovie) => {
           {!internal && (
           <div className='flex gap-2 text-white items-center mt-2 '>
             <button className='bg-red-600 font-bold hover:bg-red-700 whitespace-nowrap rounded-full px-4 py-2 opacity-75'>Watch now</button>
-            <button className='w-10 h-10 flex items-center justify-center rounded-full backdrop-opacity-10 backdrop-invert bg-white/30' onClick={()=>addBookmark(movie?.vote_average,`${movie?.title || movie?.name}`,`${movie?.poster_path}`,Number(movie?.id),movie?.name ?  false :  true)}>
+            {movieIds?.find((_movie:any)=>_movie.movie_id === movie?.id) 
+                ?
+                <button className='w-10 h-10 flex items-center justify-center rounded-full backdrop-opacity-10 backdrop-invert bg-white/30' onClick={()=>deleteBookmark(movie?.id)}>
+                  <AiOutlineMinus /> 
 
+                </button>
+                :
+                <button  className='w-10 h-10 flex items-center justify-center rounded-full backdrop-opacity-10 backdrop-invert bg-white/30' onClick={()=>addBookmark(movie?.vote_average,`${movie?.title || movie?.name}`,`${movie?.poster_path}`,Number(movie?.id),movie?.name ?  false :  true)}>
+                  <AiOutlinePlus /> 
+
+                </button>
+            }
+            {/* <Button addBookmark={addBookmark} /> */}
+            
+            {/* <button className='w-10 h-10 flex items-center justify-center rounded-full backdrop-opacity-10 backdrop-invert bg-white/30' onClick={()=>addBookmark(movie?.vote_average,`${movie?.title || movie?.name}`,`${movie?.poster_path}`,Number(movie?.id),movie?.name ?  false :  true)}>
               {movieIds?.find((_movie:any)=>_movie.movie_id === movie?.id) ? <AiOutlineMinus /> : <AiOutlinePlus /> }
 
-            </button>
+            </button> */}
         </div>
           )}
       

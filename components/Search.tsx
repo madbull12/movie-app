@@ -19,22 +19,28 @@ const Search = () => {
     const[openFiltering,setOpenFiltering] = useState<boolean>(false);
     const[mediaType,setMediaType] = useRecoilState(mediaTypeState)
 
-    useEffect(()=>{
-        setSearchTerm("")
-    },[]);
+    // useEffect(()=>{
+    //     setSearchTerm("")
+    // },[]);
 
     useEffect(()=>{
-        setSearchResults(null)
-    },[searchTerm])
+        if(router.pathname !== "/discovery") setSearchResults(null);
+    },[])
 
     
 
     const submitSearch = async(term:string) =>{
-        const res = await fetch(`${API_ENDPOINT}search/${mediaType.split("-")[0]}?api_key=4e460f93715e650bd9b25978e33501d9&query=${term}`);
-        const data = await res.json()
-        setSearchResults(data.results);
-        router.push("/discovery")
+        try {
+            const res = await fetch(`${API_ENDPOINT}search/${mediaType.split("-")[0]}?api_key=4e460f93715e650bd9b25978e33501d9&query=${term}`);
+            const data = await res.json()
+            setSearchResults(data?.results);
+            router.push("/discovery")
 
+        } catch(err) {
+            console.log(err)
+        } 
+
+        
         
     }
 
@@ -46,6 +52,7 @@ const Search = () => {
           e.preventDefault()
           submitSearch(searchTerm)
           setSearchTerm("")
+
       }}>
        <div className='w-full rounded-full items-center relative bg-black text-gray-500 flex gap-2 py-2 px-4'>
       

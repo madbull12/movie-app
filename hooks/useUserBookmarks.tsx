@@ -10,6 +10,7 @@ export default function useUserBookmarks(userId:string) {
           .from("bookmarks")
           .select()
           .eq("user_id",userId)
+          .order("created_at",{ ascending:false })
     
         // const findBookmark = data?.map((bookmark)=>bookmark.user_id === user?.id);
        
@@ -24,7 +25,7 @@ export default function useUserBookmarks(userId:string) {
       }
   
       getCurrentUserBookmarks();
-    },[userBookmarks,userId]);
+    },[userId]);
 
     return userBookmarks
 }
