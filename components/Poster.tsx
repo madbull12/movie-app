@@ -60,10 +60,11 @@ const Poster = ({ movie,size,type,movieIds,internal }:IMovie) => {
   } 
 
   const deleteBookmark = async(movieId:number) => {
+    console.log(movieId)
     const toastId = toast.loading('Deleting bookmark');
 
     try {
-      await supabase
+      const { data } = await supabase
       .from("bookmarks")
       .delete()
       .eq("movie_id", movieId);
@@ -71,10 +72,13 @@ const Poster = ({ movie,size,type,movieIds,internal }:IMovie) => {
       toast.success('Bookmarked deleted', {
         id: toastId,
       });
+      console.log(data)
     } catch(err) {
       toast.error("Oops!, There's an error")
       console.log(err);
-    } 
+    } finally {
+      router.push("/bookmarks")
+    }
  
   }
 
