@@ -39,11 +39,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
   const [bookmarkExists,setBookmarkExists] = useState<boolean>();
   const movieIdBookmarks = useUserBookmarks(user?.id);
 
-  useEffect(() => {
-    if(!user) {
-      router.push("/login")
-    }
-  },[]);
+
 
   
 
@@ -77,7 +73,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
       <div className='space-y-2'>
         <h1 className='text-xl md:text-2xl text-white font-bold'>9+ rated movies of all time</h1>
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
-            {discoveryMovies.map((movie)=>(
+            {discoveryMovies?.map((movie)=>(
                   
                   <Poster key={movie.id} movie={movie} size="big" type="movie"movieIds={movieIdBookmarks}   />
     
@@ -88,7 +84,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
       <div className='space-y-2'>
         <h1 className='text-xl md:text-2xl text-white font-bold'>Best TV Shows of all tiem</h1>
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
-            {discoveryTvs.map((movie)=>(
+            {discoveryTvs?.map((movie)=>(
                   
                   <Poster key={movie.id} movie={movie} size="big" type="tv-series"movieIds={movieIdBookmarks}   />
     
@@ -100,7 +96,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
         <h1 className='text-xl md:text-2xl text-white font-bold'>Animation </h1>
         <p>Movies</p>
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
-            {animationMovies.map((movie)=>(
+            {animationMovies?.map((movie)=>(
                   
                   <Poster key={movie.id} movie={movie} size="normal" type="movie"movieIds={movieIdBookmarks}   />
     
@@ -109,7 +105,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
         </div>
         <p>TV Shows</p>
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
-            {animationTvs.map((movie)=>(
+            {animationTvs?.map((movie)=>(
                   
                   <Poster key={movie.id} movie={movie} size="normal" type="tv-series" movieIds={movieIdBookmarks}  />
     
@@ -120,7 +116,7 @@ const Discovery = ({ discoveryMovies,animationMovies,thrillerMovies,discoveryTvs
       <div className='space-y-2'>
         <h1 className='text-xl md:text-2xl text-white font-bold'>Thriller Movies</h1>
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
-            {thrillerMovies.map((movie)=>(
+            {thrillerMovies?.map((movie)=>(
                   
                   <Poster key={movie.id} movie={movie} size="big" type="movie" movieIds={movieIdBookmarks}  />
     
@@ -142,11 +138,11 @@ export const getStaticProps = async() => {
 
   return {
     props:{
-      discoveryMovies,
-      animationMovies,
-      thrillerMovies,
-      discoveryTvs,
-      animationTvs
+      discoveryMovies:discoveryMovies,
+      animationMovies: animationMovies,
+      thrillerMovies:thrillerMovies ,
+      discoveryTvs:discoveryMovies ,
+      animationTvs:animationTvs 
     }
   }
 }

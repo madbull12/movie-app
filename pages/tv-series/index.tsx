@@ -32,9 +32,9 @@ export const getStaticProps = async() => {
 
     return {
         props:{
-            trendingTvShows,
-            airingToday,
-            onTheAir,
+            trendingTvShows:trendingTvShows || null,
+            airingToday:airingToday || null,
+            onTheAir:onTheAir || null,
           
         }
     }

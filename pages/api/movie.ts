@@ -78,10 +78,17 @@ export const getCredits = async(id:string)=>{
 }
 
 export const getTVCasts = async(id:string) => {
-    const res = await fetch(`${API_ENDPOINT}tv/${id}/credits?api_key=${API_KEY}`);
-    const data= await res.json();
-    
+    try {
+        const res = await fetch(`${API_ENDPOINT}tv/${id}/credits?api_key=${API_KEY}`);
+        const data= await res.json();
     return data.cast;
+
+    } catch (error) {
+        console.log(error)
+        
+    }
+
+    
 }
 
 export const getSimilar = async(id:string)=>{

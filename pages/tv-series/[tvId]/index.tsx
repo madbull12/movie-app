@@ -180,10 +180,10 @@ export const getStaticProps = async({ params }:any) => {
 
   return {
     props:{
-      tvDetails,
-      similarTvShows,
-      tvCasts,
-      tvReviews
+      tvDetails:tvDetails || null,
+      similarTvShows:similarTvShows || null,
+      tvCasts:tvCasts || null,
+      tvReviews:tvReviews || null
     }
   }
 }
