@@ -9,15 +9,16 @@ import Navbar from './Navbar'
 import Right from './Right'
 import Sidebar from './Sidebar'
 
-const Layout = ({ children }:any) => {
+interface IProps {
+  children:any
+}
+const Layout = ({ children }:IProps) => {
   const router = useRouter()
 
   const [openSidebar] = useRecoilState(rightSidebar);
 
   if(router.pathname.includes("/login")) return children;
   if(router.pathname.includes("/signup")) return children;
-
-  
 
 
   return (

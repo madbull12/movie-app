@@ -36,7 +36,7 @@ const Dashboard = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovie
 
         <h1 className='font-bold text-2xl text-white mb-2'>Trending movies</h1>
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
-          {trendingMovies.map((movie)=>(
+          {trendingMovies?.map((movie)=>(
                 
                 <Poster key={movie.id} movie={movie} size="big" type="movie" movieIds={movieIdBookmarks}   />
    
@@ -49,7 +49,7 @@ const Dashboard = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovie
         <h1 className='font-bold text-2xl text-white mb-2'>Now playing</h1>
 
         <div className="row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-rounded-md">
-          {nowPlayingMovies.map((movie)=>(
+          {nowPlayingMovies?.map((movie)=>(
               <Poster key={movie.id} movie={movie} size="normal" type="movie" movieIds={movieIdBookmarks}  />
             ))}
         </div>
@@ -58,7 +58,7 @@ const Dashboard = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovie
         <h1 className='font-bold text-2xl text-white mb-2'>Top Rated</h1>
 
         <div className="row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-rounded-md">
-          {topRatedMovies.map((movie)=>(
+          {topRatedMovies?.map((movie)=>(
               <Poster key={movie.id} movie={movie} size="normal" type="movie" movieIds={movieIdBookmarks}  />
             ))}
         </div>
@@ -67,7 +67,7 @@ const Dashboard = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovie
         <h1 className='font-bold text-2xl text-white mb-2'>Popular</h1>
 
         <div className="row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-rounded-md">
-          {popularMovies.map((movie)=>(
+          {popularMovies?.map((movie)=>(
               <Poster key={movie.id} movie={movie} size="normal" type="movie" movieIds={movieIdBookmarks}  />
             ))}
         </div>

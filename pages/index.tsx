@@ -8,6 +8,7 @@ import { useAuth } from "../context/UserContext"
 import { supabase } from '../lib/supabase'
 import { NextApiRequest,NextApiResponse } from "next";
 import { User } from '@supabase/supabase-js'
+import { useSession } from 'next-auth/react'
 
 
 
@@ -20,8 +21,7 @@ interface IMovie {
 
 const Home = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovies }:IMovie) => {
   const router = useRouter()
-
-  const [user, setUser] = useState<User | null>();
+  const { data:session } = useSession();
 
 
   // const handleLogOut: MouseEventHandler = async (e) => {
@@ -35,36 +35,34 @@ const Home = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovies }:I
   //     router.push('/login');
   //   }
   // };
-  const refreshData = () => {
-    router.replace(router.asPath)
-  }
 
-  useEffect(() => {
-    const getProfile = () => {
-      const profile = supabase.auth.user();
 
-      if (profile) {
-        setUser(profile);
+  // useEffect(() => {
+  //   const getProfile = () => {
+  //     const profile = supabase.auth.user();
+
+  //     if (profile) {
+  //       setUser(profile);
       
 
-      } else {
-        router.push('/login');
-      }
-    };
+  //     } else {
+  //       router.push('/login');
+  //     }
+  //   };
 
-    getProfile();
+  //   getProfile();
     
    
-  }, []);
+  // }, []);
 
   
 
   // const [data,setData] = useState<any>(null)
  
-  if (!user) {
-    // Currently loading asynchronously User Supabase Information
-    return null;
-  }
+  // if (!user) {
+  //   // Currently loading asynchronously User Supabase Information
+  //   return null;
+  // }
     
 
   return (
@@ -89,13 +87,14 @@ export const getServerSideProps = async(req:NextApiRequest, res:NextApiResponse)
   const [trendingMovies,nowPlayingMovies,topRatedMovies,popularMovies] = ([await getTrendingMovies(),await getNowPlaying(),await getTopRated(),await getPopular()]);
 
 
-  
+
+
   return {
     props:{
-      trendingMovies,
-      nowPlayingMovies,
-      topRatedMovies,
-      popularMovies
+      trendingMovies:trendingMovies || null,
+      nowPlayingMovies:nowPlayingMovies || null,
+      topRatedMovies:topRatedMovies || null,
+      popularMovies:popularMovies || null
     }
   }
 }

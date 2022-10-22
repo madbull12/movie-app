@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import { signIn, signOut } from 'next-auth/react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -9,41 +10,15 @@ import { supabase } from '../lib/supabase'
 
 const LoginPage = () => {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { signInWithGoogle } =useAuth();
-
-  const handleSignIn = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const { error } = await supabase.auth.signIn({
-      email,
-      password,
+  const handleSignIn = async () => {
+    await signIn("google", {
+      callbackUrl: "http://localhost:3000",
     });
-
-    if (error) {
-      alert(JSON.stringify(error));
-    } else {
-      router.push('/');
-    }
   };
-
-  const handleSignInWithGoogle: MouseEventHandler = async (e) => {
-    e.preventDefault();
-  
-    // const { error } = await supabase.auth.signIn(
-    //   {
-    //     provider: 'google',
-    //   },
-    //   {
-    //     redirectTo: 'http://localhost:3000/callback/',
-    //   }
-    // );
-  
-    // if (error) {
-    //   alert(JSON.stringify(error));
-    // }
-    signInWithGoogle();
+  const handleSignOut = async () => {
+    await signOut({
+      callbackUrl: "http://localhost:3000/",
+    });
   };
 
   return (
@@ -65,12 +40,12 @@ const LoginPage = () => {
               <div className="bg-gray-500 h-[1px] w-full"></div>
             </div>
 
-            <button className='mt-10 text-lg text-white font-semibold bg-[#EC1C24] py-3 px-6 rounded-md flex  items-center w-full justify-center gap-x-2' onClick={handleSignInWithGoogle}>
+            <button className='mt-10 text-lg text-white font-semibold bg-[#EC1C24] py-3 px-6 rounded-md flex  items-center w-full justify-center gap-x-2' onClick={handleSignIn}>
               <FcGoogle />
               Sign in with google
             </button>
 
-            <div className="flex flex-col p-4">
+            {/* <div className="flex flex-col p-4">
               <form className="flex flex-col" onSubmit={handleSignIn}>
                 <label htmlFor="email" className="text-gray-200">
                   Email
@@ -109,7 +84,7 @@ const LoginPage = () => {
                   Sign in with Email 
                 </button>
               </form>
-            </div>
+            </div> */}
           </div>
         </div>
     </main>

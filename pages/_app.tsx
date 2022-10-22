@@ -6,18 +6,26 @@ import { RecoilRoot } from 'recoil'
 import { UserContextProvider } from '../context/UserContext'
 import { supabase } from '../lib/supabase'
 import { Toaster } from 'react-hot-toast'
+import AuthWrapper from '../components/AuthWrapper'
+import { SessionProvider } from 'next-auth/react'
+import { Session } from 'inspector'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps<{
+  session:Session
+}>) {
 
   return (
-    <UserContextProvider>
-  
+    <SessionProvider session={pageProps.session}>
+      
       <RecoilRoot>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <AuthWrapper>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </AuthWrapper>
+     
       </RecoilRoot>
-    </UserContextProvider>
+    </SessionProvider>
   
   
     

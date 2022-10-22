@@ -10,6 +10,7 @@ import { IoMdSettings } from 'react-icons/io'
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../context/UserContext';
 import Image from 'next/image';
+import { signOut } from 'next-auth/react';
 
 interface ISidebar {
     handleLogout:()=>Promise<void>
@@ -19,8 +20,9 @@ const Sidebar = ({ handleLogout }:any) => {
     const router = useRouter();
     // logout using supabse
     const logout = async() => {
-        await supabase.auth.signOut()
-        router.push("/login")
+        await signOut({
+            callbackUrl: 'http://localhost:3000/',
+          })
     }
 
     const { user } = useAuth();

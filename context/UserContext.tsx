@@ -14,7 +14,8 @@ export function UserContextProvider({
   children:ReactNode
 }) {
   const [session, setSession] = useState<any>(null)
-  const [user,setUser]=useState<User | null>(null)
+  const [user,setUser]=useState<User | null>(null);
+  const [loading,setLoading] = useState<boolean>(false);
 
 
   const signInWithGoogle = async() => {
@@ -39,6 +40,7 @@ export function UserContextProvider({
     // get session for user
     const session = supabase.auth.session();
     const user = supabase.auth.user();
+    setLoading(true)
     setSession(session);
     setUser(user)
     // configure the auth state listener
@@ -46,6 +48,7 @@ export function UserContextProvider({
     // and a POST request will be made to the /api/auth route
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
       setSession(session)
+      
       console.log(authListener)
   
       await fetch('/api/auth', {
@@ -54,8 +57,13 @@ export function UserContextProvider({
         headers: {
           'Content-Type': 'application/json'
         }
+
+
       })
     });
+
+    setLoading(false)
+
 
     return () => {
       authListener?.unsubscribe();
@@ -64,7 +72,7 @@ export function UserContextProvider({
 
 
 
-  return <UserContext.Provider value={{ session,signInWithGoogle,user }}>
+  return <UserContext.Provider value={{ session,signInWithGoogle,user,loading }}>
     {children}
   </UserContext.Provider>;
 };
