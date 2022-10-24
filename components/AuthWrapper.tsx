@@ -4,7 +4,7 @@ import React from 'react'
 import ProtectedRoute from './ProtectedRoute'
 import { useSession } from 'next-auth/react'
 
-const authRoutes = ['/']
+const authRoutes = ['/',"/discovery","/tv-series/[tvId]","/tv-series/[tvId]/season/[seasonId]","/movie/[movieId]","/movie","/bookmarks","/tv-series"]
 
 const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter()
