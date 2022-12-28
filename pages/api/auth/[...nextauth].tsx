@@ -4,6 +4,14 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import prisma from "../../../lib/prisma"
 
 export default NextAuth({
+  callbacks: {
+    session({ session, user }:any) {
+      if (session.user) {
+        session.user.id = user.id;
+      }
+      return session;
+    },
+  },
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({

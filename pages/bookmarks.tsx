@@ -6,6 +6,7 @@ import { useAuth } from '../context/UserContext';
 import useUserBookmarks from '../hooks/useUserBookmarks';
 import { supabase } from '../lib/supabase';
 
+
 const Bookmarks = () => {
     const { user } = useAuth();
 
