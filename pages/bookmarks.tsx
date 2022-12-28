@@ -3,7 +3,7 @@ import Head from 'next/head';
 import React from 'react'
 import Poster from '../components/Poster';
 import { useAuth } from '../context/UserContext';
-import useUserBookmarks from '../hooks/useUserBookmarks';
+import useUserBookmarks from '../hooks/useFavourites';
 import { supabase } from '../lib/supabase';
 
 

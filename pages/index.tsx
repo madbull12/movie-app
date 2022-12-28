@@ -22,6 +22,7 @@ interface IMovie {
 const Home = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovies }:IMovie) => {
   const router = useRouter()
   const { data:session } = useSession();
+  console.log(trendingMovies)
 
 
   // const handleLogOut: MouseEventHandler = async (e) => {

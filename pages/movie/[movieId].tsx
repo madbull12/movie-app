@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { BiHeart } from 'react-icons/bi'
 import Poster from '../../components/Poster'
 import ReviewCard from '../../components/ReviewCard'
+import useFavourites from '../../hooks/useFavourites'
 import { Cast, Movie, MovieDetails, MovieReview } from '../../interface'
 import { getTrendingMovies,getNowPlaying,getTopRated,getPopular, getMovieDetails, getRecommendations, getCredits, getSimilar, getReviews } from '../api/movie'
 
@@ -24,7 +25,10 @@ const MovieDetailsPage = ({ movieDetails,movieRecommendations,movieCasts,movieSi
     useEffect(()=>{
         setShowMoreRecommendations(false);
         setShowMoreCasts(false);
-    },[])
+    },[]);
+
+    const { userFavourites,addFavourite,deleteFavourite } = useFavourites(movieDetails);
+
 
   return (
     <main className=' bg-[#0D0C0F]  text-gray-500 ml-[55px] md:ml-[190px] mx-auto max-w-4xl min-h-screen space-y-4'>

@@ -109,3 +109,12 @@ interface Author {
 //     id:number;
 
 // }
+
+export interface ISaved {
+    title:string;
+    id:string;
+    vote_average:string;
+    movieId:string;
+    release_date:string;
+
+}

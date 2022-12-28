@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/UserContext";
 import toast from "react-hot-toast";
-import useUserBookmarks from "../hooks/useUserBookmarks";
 import Button from "./Button";
 
 // npm i --save-dev @types/react-rating-stars-component
@@ -20,7 +19,7 @@ interface IMovie {
   internal?: boolean;
 }
 
-const Poster = ({ movie, size, type, movieIds, internal }: IMovie) => {
+const Poster = ({ movie, size, type, internal }: IMovie) => {
   const router = useRouter();
   const { user } = useAuth();
 
@@ -146,7 +145,7 @@ const Poster = ({ movie, size, type, movieIds, internal }: IMovie) => {
             <button className="bg-red-600 font-bold hover:bg-red-700 whitespace-nowrap rounded-full px-4 py-2 opacity-75">
               Watch now
             </button>
-            {movieIds?.find((_movie: any) => _movie.movie_id === movie?.id) ? (
+            {/* {movieIds?.find((_movie: any) => _movie.movie_id === movie?.id) ? (
               <button
                 className="w-10 h-10 flex items-center justify-center rounded-full backdrop-opacity-10 backdrop-invert bg-white/30"
                 onClick={() => deleteBookmark(movie?.id)}
@@ -168,7 +167,7 @@ const Poster = ({ movie, size, type, movieIds, internal }: IMovie) => {
               >
                 <AiOutlinePlus />
               </button>
-            )}
+            )} */}
             {/* <Button addBookmark={addBookmark} /> */}
 
             {/* <button className='w-10 h-10 flex items-center justify-center rounded-full backdrop-opacity-10 backdrop-invert bg-white/30' onClick={()=>addBookmark(movie?.vote_average,`${movie?.title || movie?.name}`,`${movie?.poster_path}`,Number(movie?.id),movie?.name ?  false :  true)}>

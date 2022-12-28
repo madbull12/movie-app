@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAuth } from '../context/UserContext';
-import useUserBookmarks from '../hooks/useUserBookmarks';
+import useUserBookmarks from '../hooks/useFavourites';
 import { Movie } from '../interface'
 import Poster from './Poster'
 import Search from './Search';
