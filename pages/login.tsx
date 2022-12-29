@@ -5,8 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { MouseEventHandler, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { useAuth } from "../context/UserContext";
-import { supabase } from "../lib/supabase";
+
 
 const LoginPage = () => {
   const router = useRouter();

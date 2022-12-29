@@ -13,7 +13,6 @@ import { useRecoilState } from "recoil";
 import { searchResultsState, searchState } from "../atoms/searchAtom";
 import { mediaTypeState } from "../atoms/mediaTypeAtom";
 import Head from "next/head";
-import { useAuth } from "../context/UserContext";
 import { useRouter } from "next/router";
 import Search from "../components/Search";
 import useUserBookmarks from "../hooks/useFavourites";
@@ -42,7 +41,6 @@ const Discovery = ({
   const router = useRouter();
   const [mediaType] = useRecoilState(mediaTypeState);
 
-  const { user } = useAuth();
 
   const [bookmarkExists, setBookmarkExists] = useState<boolean>();
 

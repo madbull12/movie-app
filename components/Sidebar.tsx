@@ -7,10 +7,8 @@ import { BsFillAlarmFill, BsFillBookmarkCheckFill } from 'react-icons/bs'
 import { RiCompassDiscoverFill, RiDoubleQuotesR } from 'react-icons/ri'
 import { MdOutlineGroups } from 'react-icons/md'
 import { IoMdSettings } from 'react-icons/io'
-import { supabase } from '../lib/supabase';
-import { useAuth } from '../context/UserContext';
 import Image from 'next/image';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 interface ISidebar {
     handleLogout:()=>Promise<void>
@@ -18,6 +16,8 @@ interface ISidebar {
 
 const Sidebar = ({ handleLogout }:any) => {
     const router = useRouter();
+  const { data:session } = useSession();
+
     // logout using supabse
     const logout = async() => {
         await signOut({
@@ -25,7 +25,6 @@ const Sidebar = ({ handleLogout }:any) => {
           })
     }
 
-    const { user } = useAuth();
 
   return (
     <aside  className='flex flex-col  bg-[#1A161F] pl-2 md:pl-4 z-50 w-14 md:w-48 pt-16 pb-4 fixed top-0 min-h-screen left-0  space-y-4 divide-y-0 md:divide-y divide-gray-500 '>
@@ -99,9 +98,9 @@ const Sidebar = ({ handleLogout }:any) => {
                 <AiOutlineLogout className='text-2xl md:text-base' />
                 <p className='hidden md:block'>Logout</p>
             </button>
-            {user && (
+            {session && (
                 <div className="md:hidden">
-                    <Image alt="profile" src={user?.user_metadata?.avatar_url || "https://i.pinimg.com/564x/bc/ed/64/bced64b767d4a7f6f0fd14e66b64ed35.jpg"} width={30} height={30} objectFit="cover" className='rounded-full'  />
+                    <Image alt="profile" src={session?.user?.image || "https://i.pinimg.com/564x/bc/ed/64/bced64b767d4a7f6f0fd14e66b64ed35.jpg"} width={30} height={30} objectFit="cover" className='rounded-full'  />
 
             </div>
             )}

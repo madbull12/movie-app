@@ -28,8 +28,8 @@ const MovieDetailsPage = ({ movieDetails,movieRecommendations,movieCasts,movieSi
         setShowMoreCasts(false);
     },[]);
 
-    const { userFavourites,addFavourite,deleteFavourite } = useFavourites(movieDetails);
-
+    const { userFavourites,handleAddFavourite } = useFavourites(movieDetails);
+    console.log(userFavourites)
 
   return (
     <Body>

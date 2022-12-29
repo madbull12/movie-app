@@ -1,5 +1,4 @@
 import React from 'react'
-import { useAuth } from '../context/UserContext';
 import useUserBookmarks from '../hooks/useFavourites';
 import { Movie } from '../interface'
 import Body from './Body';
@@ -13,8 +12,6 @@ interface ITVShows {
 }
 
 const TVDashboard = ({ trendingTvShows,airingToday,onTheAir }:ITVShows) => {
-  const { user } = useAuth();
-  const tvIdBookmarks = useUserBookmarks(user?.id);
   return (
     <Body>
         <div className='md:hidden'>

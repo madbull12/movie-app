@@ -19,12 +19,13 @@ model Bookmark {
   title        String
   vote_average Float
   release_date String
+  poster_path  String
 }
 
 model Favourite {
-  id           String @id @default(cuid())
-  createdAt    DateTime @default(now())
-
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  poster_path  String
   userId       String
   user         User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   movieId      Int

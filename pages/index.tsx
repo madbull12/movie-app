@@ -3,11 +3,8 @@ import Dashboard from '../components/Dashboard'
 import { Movie } from '../interface'
 import { getNowPlaying, getPopular, getTopRated, getTrendingMovies } from './api/movie'
 import { useRouter } from 'next/router'
-import { MouseEventHandler, useEffect, useState } from 'react'
-import { useAuth } from "../context/UserContext"
-import { supabase } from '../lib/supabase'
+
 import { NextApiRequest,NextApiResponse } from "next";
-import { User } from '@supabase/supabase-js'
 import { useSession } from 'next-auth/react'
 
 

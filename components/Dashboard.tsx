@@ -1,12 +1,12 @@
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { searchState } from '../atoms/searchAtom'
-import { useAuth } from '../context/UserContext'
 import useUserBookmarks from '../hooks/useFavourites'
 import { Movie } from '../interface'
-import { supabase } from '../lib/supabase'
+// import { supabase } from '../lib/supabase'
 import Body from './Body'
 import Poster from './Poster'
 import Search from './Search'
@@ -20,11 +20,10 @@ interface IMovie {
 
 
 const Dashboard = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovies }:IMovie) => {
-  const { user } = useAuth(); 
+  
 
-
+  const { data:session } = useSession();
   // const [bookmarkExists,setBookmarkExists] = useState<boolean>();
-  const movieIdBookmarks = useUserBookmarks(user?.id);
 
 
 

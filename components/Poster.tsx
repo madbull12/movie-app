@@ -4,8 +4,7 @@ import { Movie } from "../interface";
 import { AiFillStar, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { supabase } from "../lib/supabase";
-import { useAuth } from "../context/UserContext";
+
 import toast from "react-hot-toast";
 import Button from "./Button";
 
@@ -21,70 +20,9 @@ interface IMovie {
 
 const Poster = ({ movie, size, type, internal }: IMovie) => {
   const router = useRouter();
-  const { user } = useAuth();
 
-  const refreshData = () => {
-    router.replace(router.asPath);
-  };
 
-  const addBookmark = async (
-    vote_avg: number,
-    title: string,
-    poster_path: string,
-    movie_id: number,
-    isMovie: boolean
-  ) => {
-    console.log("clicked");
-    const toastId = toast.loading("Adding bookmark");
-    try {
-      await supabase.from("bookmarks").insert(
-        [
-          {
-            title: title,
-            vote_average: vote_avg,
-            poster_path,
-            user_id: user?.id,
-            movie_id: movie_id,
-            isMovie,
-          },
-        ],
-        {
-          returning: "minimal",
-        }
-      );
-      toast.success("Bookmarked created", {
-        id: toastId,
-      });
-    } catch (err) {
-      toast.error("Oops!, There's an error");
-      console.log(err);
-    } finally {
-      router.push("/bookmarks");
-    }
-  };
-
-  const deleteBookmark = async (movieId: number) => {
-    console.log(movieId);
-    const toastId = toast.loading("Deleting bookmark");
-
-    try {
-      const { data } = await supabase
-        .from("bookmarks")
-        .delete()
-        .eq("movie_id", movieId);
-
-      toast.success("Bookmarked deleted", {
-        id: toastId,
-      });
-      console.log(data);
-    } catch (err) {
-      toast.error("Oops!, There's an error");
-      console.log(err);
-    } finally {
-      router.push("/bookmarks");
-    }
-  };
-
+  
   return (
     <section
       className="relative cursor-pointer"
