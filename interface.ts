@@ -28,7 +28,7 @@ export interface MovieDetails {
     overview:string;
     runtime?:number;
     vote_average:number;
-
+    poster_path:string;
 }
 
 export interface TVDetails extends MovieDetails {
@@ -40,6 +40,7 @@ export interface TVDetails extends MovieDetails {
     number_of_episodes:number;
     number_of_seasons:number
     seasons:Season[];
+    type:string;
 }
 
 interface Season {

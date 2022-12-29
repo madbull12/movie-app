@@ -10,6 +10,7 @@ export const favouriteRouter = router({
         vote_average: z.number(),
         release_date: z.string(),
         poster_path: z.string(),
+        type:z.string()
       })
     )
     .mutation(({ input, ctx }) => {
@@ -27,6 +28,7 @@ export const favouriteRouter = router({
           poster_path: input?.poster_path,
           vote_average: input?.vote_average,
           release_date: input?.release_date,
+          type: input?.type ,
           user: {
             connect: {
               id: userId as string,

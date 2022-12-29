@@ -27,8 +27,8 @@ const TVDetailsPage = ({ tvDetails,similarTvShows,tvCasts,tvReviews }:ITV) => {
     useEffect(()=>{
       setShowMoreSeasons(false);
       setShowMoreCasts(false);
-    },[])
-    // console.log(tvDetails)
+    },[]);
+    console.log(tvDetails)
   return (
       <Body>
         <Head>

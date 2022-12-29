@@ -67,6 +67,7 @@ export default function useFavourites(movie?: MovieDetails | Movie) {
         poster_path,
         movieId,
         release_date,
+        type:router.pathname.includes("/movie") ? "movie" : "tv"
       });
       toast.success("Favourited", {
         id: toastId,
