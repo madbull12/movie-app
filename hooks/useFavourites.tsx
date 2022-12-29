@@ -8,6 +8,7 @@ import { supabase } from "../lib/supabase";
 export default function useFavourites(movie?: MovieDetails | Movie) {
   const [userFavourites, setUserFavourites] = useState<ISaved[]>();
   const { data: session }: any = useSession();
+  console.log(session)
   const router = useRouter();
   const [favorited, setFavorited] = useState(false);
   const addedToFavourites = userFavourites?.find(
@@ -15,12 +16,12 @@ export default function useFavourites(movie?: MovieDetails | Movie) {
   );
   const deleteFavourite = async (movieId: number) => {
     console.log(movieId);
-    const toastId = toast.loading("Deleting bookmark");
+    const toastId = toast.loading("Deleting favourite");
     setFavorited(false)
 
     try {
       const { data } = await supabase
-        .from("favourite")
+        .from("Favourite")
         .delete()
         .eq("movieId", movieId);
 
@@ -36,10 +37,11 @@ export default function useFavourites(movie?: MovieDetails | Movie) {
     }
   };
   const addFavourite = async (
-    vote_avg: number,
+    vote_average: number,
     title: string,
     poster_path: string,
-    movie_id: number
+    movieId: number,
+    release_date:string
   ) => {
     console.log("clicked");
     const toastId = toast.loading("Adding bookmark");
@@ -48,32 +50,33 @@ export default function useFavourites(movie?: MovieDetails | Movie) {
       await supabase.from("favourite").insert(
         [
           {
-            title: title,
-            vote_average: vote_avg,
+            title,
+            vote_average,
             poster_path,
             userId: session?.user?.id as string,
-            movieId: movie_id,
+            movieId,
+            release_date
           },
         ],
         {
           returning: "minimal",
         }
       );
-      toast.success("Bookmarked created", {
+      toast.success("Favourited", {
         id: toastId,
       });
     } catch (err) {
       toast.error("Oops!, There's an error");
       console.log(err);
     } finally {
-      router.push("/bookmarks");
+      router.push("/favourites");
     }
   };
 
   useEffect(() => {
     const getCurrentUserBookmarks = async () => {
       const { data } = await supabase
-        .from("favourite")
+        .from("Favourite")
         .select()
         .eq("userId", session?.user.id)
         .order("createdAt", { ascending: false });

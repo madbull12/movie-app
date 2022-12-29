@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import AuthWrapper from "../components/AuthWrapper";
 import { SessionProvider } from "next-auth/react";
 import { Session } from "inspector";
+import { trpc } from '../utils/trpc';
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -27,4 +28,4 @@ const MyApp: AppType<{ session: Session | null }> = ({
   );
 };
 
-export default MyApp;
+export default trpc.withTRPC(MyApp);

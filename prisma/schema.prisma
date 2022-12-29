@@ -15,7 +15,7 @@ model Bookmark {
   createdAt    DateTime @default(now())
   userId       String
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  movieId      String
+  movieId      Int
   title        String
   vote_average Float
   release_date String
@@ -27,7 +27,7 @@ model Favourite {
 
   userId       String
   user         User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  movieId      String
+  movieId      Int
   title        String
   vote_average Float
   release_date String

@@ -114,7 +114,7 @@ export interface ISaved {
     title:string;
     id:string;
     vote_average:string;
-    movieId:string;
+    movieId:number;
     release_date:string;
 
 }
