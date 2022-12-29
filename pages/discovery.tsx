@@ -17,6 +17,7 @@ import { useAuth } from "../context/UserContext";
 import { useRouter } from "next/router";
 import Search from "../components/Search";
 import useUserBookmarks from "../hooks/useFavourites";
+import Body from "../components/Body";
 
 interface IDiscoveryMovies {
   discoveryMovies: Movie[];
@@ -53,7 +54,7 @@ const Discovery = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="pl-6 bg-[#0D0C0F]  text-gray-500 ml-[55px] md:ml-[190px] mx-auto max-w-4xl min-h-screen space-y-4">
+      <Body>
         <h1 className="text-2xl  md:text-4xl text-white font-black text-center whitespace-nowrap ">
           Discover Movie Star
         </h1>
@@ -149,7 +150,7 @@ const Discovery = ({
             ))}
           </div>
         </div>
-      </div>
+      </Body>
     </main>
   );
 };

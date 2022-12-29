@@ -7,6 +7,7 @@ import { useAuth } from '../context/UserContext'
 import useUserBookmarks from '../hooks/useFavourites'
 import { Movie } from '../interface'
 import { supabase } from '../lib/supabase'
+import Body from './Body'
 import Poster from './Poster'
 import Search from './Search'
 
@@ -28,7 +29,7 @@ const Dashboard = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovie
 
 
   return (
-    <div className='pl-6 bg-[#0D0C0F]  text-gray-500 ml-[55px] md:ml-[190px] mx-auto max-w-4xl min-h-screen space-y-8'>
+    <Body>
       <div>
       <div className='md:hidden'>
           <Search />
@@ -38,7 +39,7 @@ const Dashboard = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovie
         <div className='row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
           {trendingMovies?.map((movie)=>(
                 
-                <Poster key={movie.id} movie={movie} size="big" type="movie" movieIds={movieIdBookmarks}   />
+                <Poster key={movie.id} movie={movie} size="big" type="movie"    />
    
    
           ))}
@@ -50,7 +51,7 @@ const Dashboard = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovie
 
         <div className="row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-rounded-md">
           {nowPlayingMovies?.map((movie)=>(
-              <Poster key={movie.id} movie={movie} size="normal" type="movie" movieIds={movieIdBookmarks}  />
+              <Poster key={movie.id} movie={movie} size="normal" type="movie"   />
             ))}
         </div>
       </div>
@@ -59,7 +60,7 @@ const Dashboard = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovie
 
         <div className="row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-rounded-md">
           {topRatedMovies?.map((movie)=>(
-              <Poster key={movie.id} movie={movie} size="normal" type="movie" movieIds={movieIdBookmarks}  />
+              <Poster key={movie.id} movie={movie} size="normal" type="movie"   />
             ))}
         </div>
       </div>
@@ -68,14 +69,14 @@ const Dashboard = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovie
 
         <div className="row  scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-rounded-md">
           {popularMovies?.map((movie)=>(
-              <Poster key={movie.id} movie={movie} size="normal" type="movie" movieIds={movieIdBookmarks}  />
+              <Poster key={movie.id} movie={movie} size="normal" type="movie"   />
             ))}
         </div>
       </div>
       
 
 
-    </div>
+    </Body>
   )
 }
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { useAuth } from '../context/UserContext';
 import useUserBookmarks from '../hooks/useFavourites';
 import { Movie } from '../interface'
+import Body from './Body';
 import Poster from './Poster'
 import Search from './Search';
 
@@ -15,7 +16,7 @@ const TVDashboard = ({ trendingTvShows,airingToday,onTheAir }:ITVShows) => {
   const { user } = useAuth();
   const tvIdBookmarks = useUserBookmarks(user?.id);
   return (
-    <section className='pl-6 bg-[#0D0C0F]  text-gray-500 ml-[55px] md:ml-[190px] mx-auto max-w-4xl min-h-screen '>
+    <Body>
         <div className='md:hidden'>
           <Search  />
         </div>
@@ -23,7 +24,7 @@ const TVDashboard = ({ trendingTvShows,airingToday,onTheAir }:ITVShows) => {
         <h1 className='text-white font-bold text-2xl'>Trending this week</h1>
           <div className='row scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
             {trendingTvShows.map((show)=>(
-              <Poster key={show.id} movie={show} size="big" type="tv-series" movieIds={tvIdBookmarks}  />
+              <Poster key={show.id} movie={show} size="big" type="tv-series"   />
             ))}
           </div>
       </article>
@@ -33,7 +34,7 @@ const TVDashboard = ({ trendingTvShows,airingToday,onTheAir }:ITVShows) => {
 
         <div className='row scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
           {airingToday.map((show)=>(
-            <Poster key={show.id} movie={show} size="normal" type="tv-series" movieIds={tvIdBookmarks}  />
+            <Poster key={show.id} movie={show} size="normal" type="tv-series"   />
           ))}
         </div>
       </article>
@@ -42,13 +43,13 @@ const TVDashboard = ({ trendingTvShows,airingToday,onTheAir }:ITVShows) => {
 
         <div className='row scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-none rounded scrollbar-thumb-rounded-md'>
           {onTheAir.map((show)=>(
-            <Poster key={show.id} movie={show} size="normal" type="tv-series" movieIds={tvIdBookmarks} />
+            <Poster key={show.id} movie={show} size="normal" type="tv-series"  />
           ))}
         </div>
       </article>
         
 
-    </section>
+    </Body>
   )
 }
 

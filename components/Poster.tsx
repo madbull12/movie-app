@@ -102,13 +102,13 @@ const Poster = ({ movie, size, type, internal }: IMovie) => {
           width={`${size === "big" ? "500" : "200"}`}
           height={`${size === "big" ? "300" : "250"}`}
           objectFit="cover"
-          className="w-full rounded-xl z-[999] cursor-pointer"
+          className="w-full rounded-xl z-[100] cursor-pointer"
         />
       </div>
 
       {/* <Image src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width={`${size === "big" ? "500":"200"}`}  height={`${size === "big" ? "300":"250"}`} objectFit='cover' className="w-full rounded-xl cursor-pointer" /> */}
       {size === "normal" && (
-        <div className="absolute top-4 z-[999] left-4 flex gap-1.5 items-center bg-black opacity-75 rounded-full px-2">
+        <div className="absolute top-4 z-[100] left-4 flex gap-1.5 items-center bg-black opacity-75 rounded-full px-2">
           <AiFillStar color="yellow" />
           <p className="text-white">{movie.vote_average.toFixed(1)}</p>
         </div>
@@ -116,7 +116,7 @@ const Poster = ({ movie, size, type, internal }: IMovie) => {
       <div
         className={`flex ${
           size === "big" ? "items-center" : ""
-        } justify-between w-[95%] absolute z-[1000] bottom-4 left-4 ${
+        } justify-between w-[95%] absolute z-[500] bottom-4 left-4 ${
           size === "normal" ? "flex-col" : ""
         }`}
       >
@@ -177,7 +177,7 @@ const Poster = ({ movie, size, type, internal }: IMovie) => {
           </div>
         )}
       </div>
-      <div className="absolute top-0 right-0 bottom-0 left-0 bg-gradient-to-b z-[999] from-transparent via-[#000000cb] to-black "></div>
+      <div className="absolute top-0 right-0 bottom-0 left-0 bg-gradient-to-b z-[100] from-transparent via-[#000000cb] to-black "></div>
     </section>
   );
 };

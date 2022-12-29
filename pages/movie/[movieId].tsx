@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { BiHeart } from 'react-icons/bi'
+import Body from '../../components/Body'
 import Poster from '../../components/Poster'
 import ReviewCard from '../../components/ReviewCard'
 import useFavourites from '../../hooks/useFavourites'
@@ -31,7 +32,7 @@ const MovieDetailsPage = ({ movieDetails,movieRecommendations,movieCasts,movieSi
 
 
   return (
-    <main className=' bg-[#0D0C0F]  text-gray-500 ml-[55px] md:ml-[190px] mx-auto max-w-4xl min-h-screen space-y-4'>
+    <Body>
      
         <Head>
             <title>{movieDetails.title}</title>
@@ -138,7 +139,7 @@ const MovieDetailsPage = ({ movieDetails,movieRecommendations,movieCasts,movieSi
      
         
 
-    </main>
+    </Body>
   )
 }
 

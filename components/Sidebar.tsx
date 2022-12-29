@@ -28,7 +28,7 @@ const Sidebar = ({ handleLogout }:any) => {
     const { user } = useAuth();
 
   return (
-    <section className='flex flex-col  bg-[#1A161F] pl-2 md:pl-4 w-14 md:w-48 pt-16 pb-4 fixed top-0 min-h-screen left-0  space-y-4 divide-y-0 md:divide-y divide-gray-500 z-10'>
+    <aside  className='flex flex-col  bg-[#1A161F] pl-2 md:pl-4 z-50 w-14 md:w-48 pt-16 pb-4 fixed top-0 min-h-screen left-0  space-y-4 divide-y-0 md:divide-y divide-gray-500 '>
         <div className='text-gray-500 space-y-3 '>
             <p className="text-xs  tracking-tighter font-bold hidden md:block">MENU</p>
             <ul className='space-y-3 flex flex-col pl-[6px] '>
@@ -108,7 +108,7 @@ const Sidebar = ({ handleLogout }:any) => {
        
         </div>
     
-    </section>
+    </aside>
   )
 }
 

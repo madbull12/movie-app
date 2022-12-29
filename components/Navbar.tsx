@@ -13,7 +13,7 @@ const Navbar:FC = () => {
   const router = useRouter();
   const [openSidebar,setOpenSidebar] = useRecoilState(rightSidebar)
   return (
-    <nav className="sticky ml-[55px] md:ml-[190px]  pl-6 text-gray-500 h-16 flex justify-between items-center  top-0 bg-[#0D0C0F] max-w-[894px] z-10">
+    <nav className="sticky ml-[55px] md:ml-[190px]  pl-6 text-gray-500 h-16 flex justify-between items-center  top-0 bg-[#0D0C0F] max-w-[894px] z-[999]">
        
         <ul className='flex gap-x-8 whitespace-nowrap'>
             <li className={`${router.pathname === "/" ? "text-white font-bold" : ""}`}>

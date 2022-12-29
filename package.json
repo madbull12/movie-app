@@ -27,13 +27,13 @@
     "@types/node": "17.0.36",
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.5",
-    "autoprefixer": "^10.4.7",
+    "autoprefixer": "^10.4.13",
     "eslint": "8.16.0",
     "eslint-config-next": "12.1.6",
-    "postcss": "^8.4.5",
+    "postcss": "^8.4.20",
     "prisma": "^4.5.0",
     "tailwind-scrollbar": "^1.3.1",
-    "tailwindcss": "^3.0.24",
+    "tailwindcss": "^3.2.4",
     "typescript": "4.7.2"
   }
 }
