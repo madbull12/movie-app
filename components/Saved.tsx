@@ -3,10 +3,20 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import { AiFillStar } from "react-icons/ai";
-import { IoMdTrash } from 'react-icons/io'
+import { BiTrash } from "react-icons/bi";
+import { trpc } from "../utils/trpc";
 
 const Saved = ({ movie }: { movie: Favourite }) => {
   const router = useRouter();
+  const utils = trpc.useContext();
+  const { mutate: deleteFavourite } =
+    trpc.favourite.deleteFavourite.useMutation({
+
+      onSettled: () => {
+        utils.favourite.getUserFavourites.invalidate();
+      },
+    });
+
   return (
     <section onClick={()=>router.push(`/movie/${movie.movieId}`)} className="relative cursor-pointer">
       {/* `/${type}/${movie.id}` */}
@@ -39,9 +49,15 @@ const Saved = ({ movie }: { movie: Favourite }) => {
    
         </div>
    
-          <div className="flex gap-2 text-white items-center mt-2 ">
+          <div className="flex gap-2 text-white justify-between items-center mt-2 p-1">
             <button className="bg-red-600 font-bold hover:bg-red-700 whitespace-nowrap rounded-full px-4 py-2 opacity-75">
               Watch now
+            </button>
+            <button onClick={(e)=>{
+              e.stopPropagation();
+              deleteFavourite({ favouriteId:movie.id })
+            }}>
+              <BiTrash className="text-xl" />
             </button>
             {/* {movieIds?.find((_movie: any) => _movie.movie_id === movie?.id) ? (
               <button
