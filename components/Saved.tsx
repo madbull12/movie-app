@@ -16,9 +16,16 @@ const Saved = ({ movie }: { movie: Favourite }) => {
         utils.favourite.getUserFavourites.invalidate();
       },
     });
+  const { mutate: deleteBookmark } =
+    trpc.bookmark.deleteBookmark.useMutation({
+
+      onSettled: () => {
+        utils.bookmark.getUserBookmarks.invalidate();
+      },
+    });
 
   return (
-    <section onClick={()=>router.push(`/movie/${movie.movieId}`)} className="relative cursor-pointer">
+    <section onClick={()=>router.push(`/${movie.type === "tv" ? "tv-series" : "movie"}/${movie.movieId}`)} className="relative cursor-pointer">
       {/* `/${type}/${movie.id}` */}
       <div className="z-10">
         <Image
@@ -55,7 +62,8 @@ const Saved = ({ movie }: { movie: Favourite }) => {
             </button>
             <button onClick={(e)=>{
               e.stopPropagation();
-              deleteFavourite({ favouriteId:movie.id })
+              router.pathname === "/favourites" ? deleteFavourite({ favouriteId:movie.id })  : deleteBookmark({ bookmarkId:movie.id })
+              
             }}>
               <BiTrash className="text-xl" />
             </button>

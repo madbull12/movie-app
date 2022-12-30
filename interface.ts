@@ -14,6 +14,7 @@ export interface Movie {
     vote_average:number;
     name?:string;
     movie_id?:number;
+    first_air_date:string;
 }
 
 export interface MovieDetails {
@@ -29,6 +30,8 @@ export interface MovieDetails {
     runtime?:number;
     vote_average:number;
     poster_path:string;
+    name:string
+    
 }
 
 export interface TVDetails extends MovieDetails {

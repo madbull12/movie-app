@@ -8,22 +8,28 @@ import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import Button from "./Button";
 import { Favourite } from "@prisma/client";
+import useBookmarks from "../hooks/useBookmarks";
+import { BsBookmarkStar, BsBookmarkStarFill } from "react-icons/bs";
 
 // npm i --save-dev @types/react-rating-stars-component
 
 interface IMovie {
-  movie: Movie 
+  movie: Movie;
   size: "normal" | "big";
   type: string;
   movieIds?: [number];
   internal?: boolean;
-} 
+}
 
 const Poster = ({ movie, size, type, internal }: IMovie) => {
   const router = useRouter();
+  const {
+    addedToBookmarks,
+    handleDeleteBookmark,
+    handleAddBookmark,
+    bookmarked,
+  } = useBookmarks(movie);
 
-
-  
   return (
     <section
       className="relative cursor-pointer"
@@ -79,11 +85,33 @@ const Poster = ({ movie, size, type, internal }: IMovie) => {
             </div>
           )}
         </div>
-          <div className="flex gap-2 text-white items-center mt-2 ">
-            <button className="bg-red-600 font-bold hover:bg-red-700 whitespace-nowrap rounded-full px-4 py-2 opacity-75">
-              Watch now
-            </button>
-            {/* {movieIds?.find((_movie: any) => _movie.movie_id === movie?.id) ? (
+        <div className="flex gap-2 text-white items-center p-1 justify-between mt-2 ">
+          <button className="bg-red-600 font-bold hover:bg-red-700 whitespace-nowrap rounded-full px-4 py-2 opacity-75">
+            Watch now
+          </button>
+          {addedToBookmarks || bookmarked ? (
+            <BsBookmarkStarFill
+              size={24}
+              color="#EC1C24"
+              className="cursor-pointer"
+              onClick={() => handleDeleteBookmark()}
+            />
+          ) : (
+            <BsBookmarkStar
+              size={24}
+              className="cursor-pointer"
+              onClick={() =>
+                handleAddBookmark(
+                  movie.vote_average,
+                  movie.title || movie.name as string,
+                  movie.poster_path as string,
+                  movie.id as number,
+                  movie.release_date || movie.first_air_date as string
+                )
+              }
+            />
+          )}
+          {/* {movieIds?.find((_movie: any) => _movie.movie_id === movie?.id) ? (
               <button
                 className="w-10 h-10 flex items-center justify-center rounded-full backdrop-opacity-10 backdrop-invert bg-white/30"
                 onClick={() => deleteBookmark(movie?.id)}
@@ -106,13 +134,13 @@ const Poster = ({ movie, size, type, internal }: IMovie) => {
                 <AiOutlinePlus />
               </button>
             )} */}
-            {/* <Button addBookmark={addBookmark} /> */}
+          {/* <Button addBookmark={addBookmark} /> */}
 
-            {/* <button className='w-10 h-10 flex items-center justify-center rounded-full backdrop-opacity-10 backdrop-invert bg-white/30' onClick={()=>addBookmark(movie?.vote_average,`${movie?.title || movie?.name}`,`${movie?.poster_path}`,Number(movie?.id),movie?.name ?  false :  true)}>
+          {/* <button className='w-10 h-10 flex items-center justify-center rounded-full backdrop-opacity-10 backdrop-invert bg-white/30' onClick={()=>addBookmark(movie?.vote_average,`${movie?.title || movie?.name}`,`${movie?.poster_path}`,Number(movie?.id),movie?.name ?  false :  true)}>
               {movieIds?.find((_movie:any)=>_movie.movie_id === movie?.id) ? <AiOutlineMinus /> : <AiOutlinePlus /> }
 
             </button> */}
-          </div>
+        </div>
       </div>
       <div className="absolute top-0 right-0 bottom-0 left-0 bg-gradient-to-b z-[100] from-transparent via-[#000000cb] to-black "></div>
     </section>

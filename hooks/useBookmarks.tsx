@@ -2,10 +2,10 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { ISaved, Movie, MovieDetails } from "../interface";
+import { ISaved, Movie, MovieDetails, TVDetails } from "../interface";
 import { trpc } from "../utils/trpc";
 
-export default function useFavourites(movie?: MovieDetails | Movie) {
+export default function useBookmarks(movie?: MovieDetails | Movie) {
   const utils = trpc.useContext();
   const { data: session }: any = useSession();
 
@@ -36,20 +36,20 @@ export default function useFavourites(movie?: MovieDetails | Movie) {
       },
     });
 
-  const { data: userFavourites } = trpc.favourite.getUserFavourites.useQuery();
-  console.log(userFavourites);
+  const { data: userBookmarks } = trpc.bookmark.getUserBookmarks.useQuery();
+  console.log(userBookmarks);
 
   const router = useRouter();
   const [bookmarked, setBookmarked] = useState(false);
-  const addedToFavourites = userFavourites?.find(
-    (favourite) => favourite.movieId === movie?.id
+  const addedToBookmarks = userBookmarks?.find(
+    (bookmark) => bookmark.movieId === movie?.id
   );
   const handleDeleteBookmark = async () => {
-    const toastId = toast.loading("Deleting favourite");
+    const toastId = toast.loading("Deleting bookmark");
     setBookmarked(false);
 
     try {
-      await deleteBookmark({ bookmarkId: addedToFavourites?.id as string });
+      await deleteBookmark({ bookmarkId: addedToBookmarks?.id as string });
 
       toast.success(`Successfully deleted `, {
         id: toastId,
@@ -66,7 +66,7 @@ export default function useFavourites(movie?: MovieDetails | Movie) {
     movieId: number,
     release_date: string
   ) => {
-    const toastId = toast.loading("Adding to favourites");
+    const toastId = toast.loading("Adding to bookmarks");
     setBookmarked(true);
     try {
       await createBookmark({
@@ -75,9 +75,9 @@ export default function useFavourites(movie?: MovieDetails | Movie) {
         poster_path,
         movieId,
         release_date,
-        type: router.pathname.includes("/movie") ? "movie" : "tv",
+        type:movie?.name ? "tv" : "movie" ,
       });
-      toast.success("Favourited", {
+      toast.success("Bookmarked", {
         id: toastId,
       });
     } catch (err) {
@@ -89,10 +89,10 @@ export default function useFavourites(movie?: MovieDetails | Movie) {
   };
 
   return {
-    userFavourites,
+    userBookmarks,
     handleAddBookmark,
     handleDeleteBookmark,
     bookmarked,
-    addedToFavourites,
+    addedToBookmarks,
   };
 }

@@ -14,6 +14,7 @@ interface ITv {
 
 const TVPage = ({ trendingTvShows,airingToday,onTheAir }:ITv) => {
  
+    console.log(trendingTvShows)
   return (
     <main className=''>
         <Head>

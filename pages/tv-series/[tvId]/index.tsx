@@ -78,6 +78,7 @@ const TVDetailsPage = ({
                 size={24}
                 className="cursor-pointer"
                 onClick={() => handleDeleteFavourite()}
+                color="#EC1C24"
               />
             ) : (
               <BiHeart

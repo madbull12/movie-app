@@ -79,6 +79,7 @@ const MovieDetailsPage = ({
             {addedToFavourites || favorited ? (
               <AiFillHeart
                 size={24}
+                color="#EC1C24"
                 className="cursor-pointer"
                 onClick={() =>
                   handleDeleteFavourite()

@@ -25,6 +25,7 @@ const Dashboard = ({ trendingMovies,nowPlayingMovies,topRatedMovies,popularMovie
   const { data:session } = useSession();
   // const [bookmarkExists,setBookmarkExists] = useState<boolean>();
 
+  console.log(trendingMovies)
 
 
   return (
