@@ -22,35 +22,43 @@ export default function useFavourites(movie?: MovieDetails | Movie) {
         utils.favourite.getUserFavourites.invalidate();
       },
     });
+  const { mutate: deleteFavourite } =
+    trpc.favourite.deleteFavourite.useMutation({
+      // onMutate: () => {
+      //   utils.favourite.getUserFavourites.cancel();
+      //   const optimisticUpdate = utils.favourite.getUserFavourites.getData();
+      //   if (optimisticUpdate) {
+      //     utils.favourite.getUserFavourites.setData(optimisticUpdate);
+      //   }
+      // },
+      onSettled: () => {
+        utils.favourite.getUserFavourites.invalidate();
+      },
+    });
 
   const { data: userFavourites } = trpc.favourite.getUserFavourites.useQuery();
-  console.log(userFavourites)
+  console.log(userFavourites);
 
   const router = useRouter();
   const [favorited, setFavorited] = useState(false);
-  const addedToFavourites = true;
-  // const deleteFavourite = async (movieId: number) => {
-  //   console.log(movieId);
-  //   const toastId = toast.loading("Deleting favourite");
-  //   setFavorited(false);
+  const addedToFavourites = userFavourites?.find(
+    (favourite) => favourite.movieId === movie?.id
+  );
+  const handleDeleteFavourite = async () => {
+    const toastId = toast.loading("Deleting favourite");
+    setFavorited(false);
 
-  //   try {
-  //     const { data } = await supabase
-  //       .from("Favourite")
-  //       .delete()
-  //       .eq("movieId", movieId);
+    try {
+      await deleteFavourite({ favouriteId: addedToFavourites?.id as string });
 
-  //     toast.success(`Successfully deleted `, {
-  //       id: toastId,
-  //     });
-  //     console.log(data);
-  //   } catch (err) {
-  //     toast.error("Oops!, There's an error");
-  //     console.log(err);
-  //   } finally {
-  //     router.push("/favourites");
-  //   }
-  // };
+      toast.success(`Successfully deleted `, {
+        id: toastId,
+      });
+    } catch (err) {
+      toast.error("Oops!, There's an error");
+      console.log(err);
+    }
+  };
   const handleAddFavourite = async (
     vote_average: number,
     title: string,
@@ -58,7 +66,7 @@ export default function useFavourites(movie?: MovieDetails | Movie) {
     movieId: number,
     release_date: string
   ) => {
-    const toastId = toast.loading("Adding bookmark");
+    const toastId = toast.loading("Adding to favourites");
     setFavorited(true);
     try {
       await createFavourite({
@@ -67,7 +75,7 @@ export default function useFavourites(movie?: MovieDetails | Movie) {
         poster_path,
         movieId,
         release_date,
-        type:router.pathname.includes("/movie") ? "movie" : "tv"
+        type: router.pathname.includes("/movie") ? "movie" : "tv",
       });
       toast.success("Favourited", {
         id: toastId,
@@ -83,7 +91,7 @@ export default function useFavourites(movie?: MovieDetails | Movie) {
   return {
     userFavourites,
     handleAddFavourite,
-    // deleteFavourite,
+    handleDeleteFavourite,
     favorited,
     addedToFavourites,
   };
