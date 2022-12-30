@@ -42,12 +42,12 @@ const Sidebar = ({ handleLogout }:any) => {
                     </span>
                 </Link>
                 <Link href="/coming-soon" >
-                    <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/coming-soon" ? "font-bold text-white" : ""}`}>
+                    <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/coming-soon" ? "font-bold text-white md:border-r-4 border-[#ec1c24]" : ""}`}>
                         <BsFillAlarmFill className='text-2xl md:text-base' color={`${router.pathname === "/coming-soon" ? "#EC1C24" : ""}`} /> <p className='hidden md:block'>Coming Soon</p>
                     </span>
                 </Link>
                 <Link href="/community" >
-                    <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/community" ? "font-bold text-white" : ""}`}>
+                    <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/community" ? "font-bold text-white md:border-r-4 border-[#ec1c24]" : ""}`}>
                         <MdOutlineGroups className='text-2xl md:text-base' color={`${router.pathname === "/community" ? "#EC1C24" : ""}`} /> <p className='hidden md:block'>Community</p>
                     </span>
                 </Link>
@@ -57,43 +57,43 @@ const Sidebar = ({ handleLogout }:any) => {
             <p className="text-xs  tracking-tighter font-bold text-gray-500 hidden md:block">LIBRARY</p>
             <ul className='space-y-3 flex flex-col pl-[6px]'>
                 <Link href="/recent" >
-                    <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/recent" ? "font-bold text-white" : ""}`}>
+                    <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/recent" ? "font-bold text-white md:border-r-4 border-[#ec1c24]" : ""}`}>
                         <AiFillClockCircle className='text-2xl md:text-base' color={`${router.pathname === "recent" ? "#EC1C24" : ""}`} /> 
                         <p className='hidden md:block'>Recent</p>
                     </span>
                 </Link>
                 <Link href="/bookmarks" >
-                    <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/bookmarks" ? "font-bold text-white" : ""}`}>
+                    <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/bookmarks" ? "font-bold text-white md:border-r-4 border-[#ec1c24]" : ""}`}>
                         <BsFillBookmarkCheckFill className='text-2xl md:text-base' color={`${router.pathname === "/bookmarks" ? "#EC1C24" : ""}`} /> <p className='hidden md:block'>Bookmarked</p>
                     </span>
                 </Link>
                 <Link href="/top-rated" >
-                    <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/top-rated" ? "font-bold text-white" : ""}`}>
+                    <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/top-rated" ? "font-bold text-white md:border-r-4 border-[#ec1c24]" : ""}`}>
                         <AiFillStar className='text-2xl md:text-base' color={`${router.pathname === "/top-rated" ? "#EC1C24" : ""}`} />
                         <p className='hidden md:block'>Top rated</p>
                     </span>
                 </Link>
                 <Link href="/downloaded" >
-                    <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/downloaded" ? "font-bold text-white" : ""}`}>
+                    <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/downloaded" ? "font-bold text-white md:border-r-4 border-[#ec1c24]" : ""}`}>
                         <AiOutlineDownload className='text-2xl md:text-base' color={`${router.pathname === "/downloaded" ? "#EC1C24" : ""}`} /> <p className='hidden md:block'>Downloaded</p>
                     </span>
                 </Link>
                 <Link href="/favourites" >
-                    <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/downloaded" ? "font-bold text-white" : ""}`}>
-                        <AiFillHeart className='text-2xl md:text-base' color={`${router.pathname === "/downloaded" ? "#EC1C24" : ""}`} /> <p className='hidden md:block'>Favourites</p>
+                    <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/favourites" ? "font-bold text-white md:border-r-4 border-[#ec1c24]" : ""}`}>
+                        <AiFillHeart className='text-2xl md:text-base' color={`${router.pathname === "/favourites" ? "#EC1C24" : ""}`} /> <p className='hidden md:block'>Favourites</p>
                     </span>
                 </Link>
             </ul>
         </div>
         <div className="space-y-3 text-gray-500 pt-4 pl-[6px]">
             <Link href="/help" >
-                <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/help" ? "font-bold text-white" : ""}`}>
+                <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/help" ? "font-bold text-white md:border-r-4 border-[#ec1c24]" : ""}`}>
                     <AiFillInfoCircle className='text-2xl md:text-base' color={`${router.pathname === "/help" ? "#EC1C24" : ""}`} />
                     <p className='hidden md:block'>Help</p>
                 </span>
                     </Link>
             <Link href="/info" >
-                <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/settings" ? "font-bold text-white" : ""}`}>
+                <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/settings" ? "font-bold text-white md:border-r-4 border-[#ec1c24]" : ""}`}>
                         <IoMdSettings className='text-2xl md:text-base' color={`${router.pathname === "/settings" ? "#EC1C24" : ""}`} /> <p className='hidden md:block'>Settings</p>
                 </span>
             </Link>
