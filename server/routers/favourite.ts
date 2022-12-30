@@ -28,7 +28,7 @@ export const favouriteRouter = router({
           poster_path: input?.poster_path,
           vote_average: input?.vote_average,
           release_date: input?.release_date,
-          type: input?.type ,
+          type: input?.type,
           user: {
             connect: {
               id: userId as string,
@@ -46,4 +46,15 @@ export const favouriteRouter = router({
       },
     });
   }),
+  deleteFavourite:publicProcedure
+    .input(z.object({
+      favouriteId:z.string()
+    }))
+    .mutation(({ input,ctx })=>{
+        return ctx.prisma.favourite.delete({
+          where:{
+            id:input.favouriteId
+          }
+        })
+    })
 });

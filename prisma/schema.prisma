@@ -21,6 +21,8 @@ model Bookmark {
   release_date String
   poster_path  String
   type         String
+
+  @@unique([userId,movieId])
 }
 
 model Favourite {
@@ -34,6 +36,8 @@ model Favourite {
   vote_average Float
   release_date String
   type         String
+
+  @@unique([userId,movieId])
 }
 
 model Account {

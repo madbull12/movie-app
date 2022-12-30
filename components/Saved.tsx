@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import { AiFillStar } from "react-icons/ai";
+import { IoMdTrash } from 'react-icons/io'
 
 const Saved = ({ movie }: { movie: Favourite }) => {
   const router = useRouter();

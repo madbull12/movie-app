@@ -8,6 +8,8 @@ import Poster from "../../components/Poster";
 import ReviewCard from "../../components/ReviewCard";
 import useFavourites from "../../hooks/useFavourites";
 import { Cast, Movie, MovieDetails, MovieReview } from "../../interface";
+import { AiFillHeart } from "react-icons/ai";
+
 import {
   getTrendingMovies,
   getNowPlaying,
@@ -43,9 +45,14 @@ const MovieDetailsPage = ({
     setShowMoreRecommendations(false);
     setShowMoreCasts(false);
   }, []);
-  console.log(movieDetails)
+  console.log(movieDetails);
 
-  const { userFavourites, handleAddFavourite } = useFavourites(movieDetails);
+  const {
+    handleAddFavourite,
+    favorited,
+    handleDeleteFavourite,
+    addedToFavourites,
+  } = useFavourites(movieDetails);
 
   return (
     <Body>
@@ -69,19 +76,29 @@ const MovieDetailsPage = ({
             <h1 className=" text-lg md:text-xl font-semibold">
               {movieDetails.title}
             </h1>
-            <BiHeart
-              size={24}
-              className="cursor-pointer"
-              onClick={() =>
-                handleAddFavourite(
-                  movieDetails.vote_average,
-                  movieDetails.title,
-                  movieDetails.backdrop_path as string,
-                  movieDetails.id,
-                  movieDetails.release_date
-                )
-              }
-            />
+            {addedToFavourites || favorited ? (
+              <AiFillHeart
+                size={24}
+                className="cursor-pointer"
+                onClick={() =>
+                  handleDeleteFavourite()
+                }
+              />
+            ) : (
+              <BiHeart
+                size={24}
+                className="cursor-pointer"
+                onClick={() =>
+                  handleAddFavourite(
+                    movieDetails.vote_average,
+                    movieDetails.title,
+                    movieDetails.backdrop_path as string,
+                    movieDetails.id,
+                    movieDetails.release_date
+                  )
+                }
+              />
+            )}
           </div>
           <div className="flex gap-2 items-center">
             <p className="font-bold">Genres:</p>

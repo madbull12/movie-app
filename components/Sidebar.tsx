@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router';
 import React, { FC } from 'react'
-import { AiFillHome,AiFillClockCircle, AiFillStar, AiOutlineDownload, AiFillInfoCircle, AiOutlineLogout } from 'react-icons/ai'
+import { AiFillHome,AiFillClockCircle, AiFillStar, AiOutlineDownload, AiFillInfoCircle, AiOutlineLogout, AiFillHeart } from 'react-icons/ai'
 import { BsFillAlarmFill, BsFillBookmarkCheckFill } from 'react-icons/bs'
 import { RiCompassDiscoverFill, RiDoubleQuotesR } from 'react-icons/ri'
 import { MdOutlineGroups } from 'react-icons/md'
@@ -76,6 +76,11 @@ const Sidebar = ({ handleLogout }:any) => {
                 <Link href="/downloaded" >
                     <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/downloaded" ? "font-bold text-white" : ""}`}>
                         <AiOutlineDownload className='text-2xl md:text-base' color={`${router.pathname === "/downloaded" ? "#EC1C24" : ""}`} /> <p className='hidden md:block'>Downloaded</p>
+                    </span>
+                </Link>
+                <Link href="/favourites" >
+                    <span className={`flex gap-1.5 items-center cursor-pointer ${router.pathname === "/downloaded" ? "font-bold text-white" : ""}`}>
+                        <AiFillHeart className='text-2xl md:text-base' color={`${router.pathname === "/downloaded" ? "#EC1C24" : ""}`} /> <p className='hidden md:block'>Favourites</p>
                     </span>
                 </Link>
             </ul>
