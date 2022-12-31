@@ -17,7 +17,6 @@ interface IMovie {
   movie: Movie;
   size: "normal" | "big";
   type: string;
-  movieIds?: [number];
   internal?: boolean;
 }
 

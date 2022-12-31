@@ -156,6 +156,13 @@ export const getMovieThriller = async() => {
     return data.results;
 }
 
+export const getUpcoming = async()=>{
+    const res = await fetch(`${API_ENDPOINT}movie/upcoming?api_key=${API_KEY}`);
+    const data= await res.json();
+
+    return data.results;
+}
+
 // export const getSearchMovies = async(searchTerm:string)=>{
 //     const res = await fetch(`${API_ENDPOINT}search/movie?api_key=${API_KEY}&query=${searchTerm}`);
 //     const data= await res.json();
